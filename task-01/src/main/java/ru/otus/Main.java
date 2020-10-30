@@ -1,0 +1,11 @@
+package ru.otus;
+
+import ru.otus.task.StringLengthTask;
+import ru.otus.test.Test;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Run \"String length\" test");
+        new Test(new StringLengthTask(), "strings").run();
+    }
+}
