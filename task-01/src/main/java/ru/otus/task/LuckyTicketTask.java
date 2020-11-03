@@ -6,33 +6,27 @@ public class LuckyTicketTask implements Task {
 
 	@Override
 	public String execute(String input) {
+		final int digitsNumber = Integer.parseInt(input);
 
-		final int digitsQuantity = Integer.parseInt(input);
-
-		long luckyTicketsQuantity = 0;
-
-		final Map<Integer, Integer> sumToQuantityMap = new HashMap<>(digitsQuantity * 9);
-
-		final List<Integer> sumList = new ArrayList<>();
-
-		for (int i = 0; i <= digitsQuantity * 9; i++) {
-			sumToQuantityMap.put(i, 0);
+		final List<Long> sumList = new ArrayList<>(digitsNumber * 9);
+		for (int i = 0; i <= digitsNumber * 9; i++) {
+			sumList.add(0L);
 		}
 
-		for (int i = 0; i < Math.pow(10, digitsQuantity); i++) {
-			int key = calcSumDigits(i);
-			sumToQuantityMap.put(key, sumToQuantityMap.get(key) + 1);
-			sumList.add(key);
+		int sum;
+		for (long i = 0L; i < Math.pow(10, digitsNumber); i++) {
+			sum = calcSumDigits(i);
+			sumList.set(sum, sumList.get(sum) + 1);
 		}
 
-		for (int k = 0; k < Math.pow(10, digitsQuantity); k++) {
-			luckyTicketsQuantity += sumToQuantityMap.get(sumList.get(k));
-		}
+		final Long luckyTicketsNumber = sumList
+				.stream()
+				.reduce(0L, (subTotal, value) -> subTotal += value * value);
 
-		return String.valueOf(luckyTicketsQuantity);
+		return String.valueOf(luckyTicketsNumber);
 	}
 
-	private int calcSumDigits(int value) {
+	private static int calcSumDigits(long value) {
 		int sum = 0;
 		while (value > 0) {
 			sum += value % 10;
