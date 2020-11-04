@@ -6,7 +6,11 @@ import ru.otus.test.Test;
 
 public class Main {
     public static void main(String[] args) {
-        new Test("String length", new StringLengthTask(), "strings").run();
-        new Test("Lucky ticket", new LuckyTicketTask(), "tickets").run();
+
+        System.out.println("\nRun test \"String length\"");
+        Test.run(new StringLengthTask(), "strings");
+
+        System.out.println("\nRun test \"Lucky ticket\"");
+        Test.run(new LuckyTicketTask(), "tickets");
     }
 }

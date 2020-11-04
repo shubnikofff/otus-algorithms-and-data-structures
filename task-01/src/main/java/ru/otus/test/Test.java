@@ -8,20 +8,8 @@ import java.io.IOException;
 
 public class Test {
 
-    private final String name;
+    public static void run(Task task, String resourcePath) {
 
-    private final Task task;
-
-    private final String resourcePath;
-
-    public Test(String name, Task task, String resourcePath) {
-        this.name = name;
-        this.task = task;
-        this.resourcePath = resourcePath;
-    }
-
-    public void run() {
-        System.out.println("Run test \"" + name + "\"");
         int index = 0;
         while (true) {
             try {
