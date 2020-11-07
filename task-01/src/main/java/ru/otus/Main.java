@@ -1,16 +1,15 @@
 package ru.otus;
 
-import ru.otus.task.LuckyTicketTask;
-import ru.otus.task.StringLengthTask;
-import ru.otus.test.Test;
+import ru.otus.strings.StringLengthTestCase;
+import ru.otus.tickets.LuckyTicketTestCase;
 
 public class Main {
     public static void main(String[] args) {
 
         System.out.println("\nRun test \"String length\"");
-        Test.run(new StringLengthTask(), "strings");
+        Test.run(new TestDataSource("strings"), new StringLengthTestCase());
 
         System.out.println("\nRun test \"Lucky ticket\"");
-        Test.run(new LuckyTicketTask(), "tickets");
+        Test.run(new TestDataSource("tickets"), new LuckyTicketTestCase());
     }
 }

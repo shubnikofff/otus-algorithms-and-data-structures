@@ -1,16 +1,13 @@
-package ru.otus.task;
+package ru.otus.tickets;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-public class LuckyTicketTask implements Task {
+public class LuckyTicketTask {
 
-    @Override
-    public String execute(String input) {
-        final int digitsNumber = Integer.parseInt(input);
-
+    public static long run(int digitsNumber) {
         final List<Long> sumList = Stream
                 .generate(() -> 0L)
                 .limit(digitsNumber * 9 + 1)
@@ -23,8 +20,7 @@ public class LuckyTicketTask implements Task {
 
         return sumList
                 .stream()
-                .reduce(0L, (subTotal, value) -> subTotal += value * value)
-                .toString();
+                .reduce(0L, (subTotal, value) -> subTotal += value * value);
     }
 
     private static int calcSumDigits(long value) {
