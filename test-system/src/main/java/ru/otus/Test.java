@@ -2,6 +2,9 @@ package ru.otus;
 
 import org.opentest4j.AssertionFailedError;
 
+import java.time.Duration;
+import java.time.Instant;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Test<I, O> {
@@ -19,13 +22,13 @@ public class Test<I, O> {
 		System.out.println("\nTest \"" + name + "\"");
 
 		dataSource.forEachRemaining(testData -> {
-			final long startTime = System.currentTimeMillis();
+			final Instant startTime = Instant.now();
 			final O result = testCase.execute(testCase.getInput(testData.getInput()));
-			final long executionTime = System.currentTimeMillis() - startTime;
+			final Instant endTime = Instant.now();
 
 			try {
 				assertEquals(testCase.getOutput(testData.getOutput()), result);
-				System.out.println("SUCCESS, Execution time " + executionTime + " ms");
+				System.out.println("SUCCESS, Execution time " + Duration.between(startTime, endTime).toMillis() + " ms");
 			} catch (AssertionFailedError e) {
 				System.out.println("FAILED, " + e.getMessage());
 			}
