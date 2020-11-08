@@ -12,12 +12,12 @@ public class StringLength implements TestCase<String, Integer> {
     }
 
     @Override
-    public String getInput(List<String> input) {
+    public String getArguments(List<String> input) {
         return input.get(0);
     }
 
     @Override
-    public Integer getOutput(List<String> output) {
+    public Integer getExpectedResult(List<String> output) {
         return Integer.parseInt(output.get(0));
     }
 }

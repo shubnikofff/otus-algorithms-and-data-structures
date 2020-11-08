@@ -6,7 +6,7 @@ public interface TestCase<I, O> {
 
     O execute(I input);
 
-    I getInput(List<String> input);
+    I getArguments(List<String> input);
 
-    O getOutput(List<String> output);
+    O getExpectedResult(List<String> output);
 }

@@ -35,12 +35,12 @@ public class LuckyTicket implements TestCase<Integer, Long> {
     }
 
     @Override
-    public Integer getInput(List<String> input) {
+    public Integer getArguments(List<String> input) {
         return Integer.parseInt(input.get(0));
     }
 
     @Override
-    public Long getOutput(List<String> output) {
+    public Long getExpectedResult(List<String> output) {
         return Long.parseLong(output.get(0));
     }
 }

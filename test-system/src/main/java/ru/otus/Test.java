@@ -23,11 +23,13 @@ public class Test<I, O> {
 
 		dataSource.forEachRemaining(testData -> {
 			final Instant startTime = Instant.now();
-			final O result = testCase.execute(testCase.getInput(testData.getInput()));
+			final I arguments = testCase.getArguments(testData.getInput());
+			final O result = testCase.execute(arguments);
 			final Instant endTime = Instant.now();
 
 			try {
-				assertEquals(testCase.getOutput(testData.getOutput()), result);
+				final O expectedResult = testCase.getExpectedResult(testData.getOutput());
+				assertEquals(expectedResult, result);
 				System.out.println("SUCCESS, Execution time " + Duration.between(startTime, endTime).toMillis() + " ms");
 			} catch (AssertionFailedError e) {
 				System.out.println("FAILED, " + e.getMessage());
