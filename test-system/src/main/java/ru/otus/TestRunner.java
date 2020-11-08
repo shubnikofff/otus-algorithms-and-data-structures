@@ -7,19 +7,19 @@ import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Test<I, O> {
+public class TestRunner<I, O> {
 
-	private final String name;
+	private final String testName;
 
 	private final TestDataSource dataSource;
 
-	public Test(String name, TestDataSource dataSource) {
-		this.name = name;
+	public TestRunner(String testName, TestDataSource dataSource) {
+		this.testName = testName;
 		this.dataSource = dataSource;
 	}
 
 	public void run(TestCase<I, O> testCase) {
-		System.out.println("\nTest \"" + name + "\"");
+		System.out.println("\nTest \"" + testName + "\"");
 
 		dataSource.forEachRemaining(testData -> {
 			final Instant startTime = Instant.now();
