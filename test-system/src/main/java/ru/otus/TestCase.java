@@ -1,6 +1,12 @@
 package ru.otus;
 
-public interface TestCase {
+import java.util.List;
 
-    boolean execute(TestData data);
+public interface TestCase<I, O> {
+
+    O execute(I input);
+
+    I getInput(List<String> input);
+
+    O getOutput(List<String> output);
 }

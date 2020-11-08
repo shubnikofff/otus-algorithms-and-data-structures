@@ -1,20 +1,21 @@
-package ru.otus.tickets;
+package ru.otus;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-public class LuckyTicketTask {
+public class LuckyTicket implements TestCase<Integer, Long> {
 
-    public static long run(int digitsNumber) {
+    @Override
+    public Long execute(Integer digitsNumber) {
         final List<Long> sumList = Stream
                 .generate(() -> 0L)
                 .limit(digitsNumber * 9 + 1)
                 .collect(Collectors.toList());
 
         LongStream.range(0L, (long) Math.pow(10, digitsNumber))
-                .map(LuckyTicketTask::calcSumDigits)
+                .map(LuckyTicket::calcSumDigits)
                 .mapToInt(v -> (int) v)
                 .forEach(sum -> sumList.set(sum, sumList.get(sum) + 1));
 
@@ -31,5 +32,15 @@ public class LuckyTicketTask {
         }
 
         return sum;
+    }
+
+    @Override
+    public Integer getInput(List<String> input) {
+        return Integer.parseInt(input.get(0));
+    }
+
+    @Override
+    public Long getOutput(List<String> output) {
+        return Long.parseLong(output.get(0));
     }
 }
