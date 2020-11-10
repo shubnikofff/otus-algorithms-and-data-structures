@@ -7,15 +7,9 @@ import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestRunner<I, O> {
+public class TestRunner {
 
-	private final TestDataSource dataSource;
-
-	public TestRunner(TestDataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-
-	public void run(Testable<I, O> testable) {
+	public static <I, O> void run(Testable<I, O> testable, TestDataSource  dataSource) {
 		System.out.println("\nTest \"" + testable.getName() + "\"");
 
 		dataSource.forEachRemaining(testData -> {
