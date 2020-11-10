@@ -18,17 +18,17 @@ public class TestRunner<I, O> {
 		this.dataSource = dataSource;
 	}
 
-	public void run(TestCase<I, O> testCase) {
+	public void run(Testable<I, O> testable) {
 		System.out.println("\nTest \"" + testName + "\"");
 
 		dataSource.forEachRemaining(testData -> {
-			final I arguments = testCase.getArguments(testData.getInput());
+			final I arguments = testable.getArguments(testData.getInput());
 			final Instant startTime = Instant.now();
-			final O result = testCase.execute(arguments);
+			final O result = testable.execute(arguments);
 			final long executionTime = Duration.between(startTime, Instant.now()).toMillis();
 
 			try {
-				final O expectedResult = testCase.getExpectedResult(testData.getOutput());
+				final O expectedResult = testable.getExpectedResult(testData.getOutput());
 				assertEquals(expectedResult, result);
 				System.out.println("SUCCESS, Execution time " + executionTime + " ms");
 			} catch (AssertionFailedError e) {

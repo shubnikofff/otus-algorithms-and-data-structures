@@ -1,10 +1,8 @@
 package ru.otus;
 
-import ru.otus.TestCase;
-
 import java.util.List;
 
-public class StringLength implements TestCase<String, Integer> {
+public class StringLength implements Testable<String, Integer> {
 
     @Override
     public Integer execute(String input) {

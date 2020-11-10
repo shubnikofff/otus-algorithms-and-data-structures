@@ -1,12 +1,12 @@
 package ru.otus.power;
 
-import ru.otus.TestCase;
+import ru.otus.Testable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
-public abstract class AbstractPower implements TestCase<Arguments, Double> {
+public abstract class AbstractPower implements Testable<Arguments, Double> {
 
 	private static final int SCALE = 11;
 
