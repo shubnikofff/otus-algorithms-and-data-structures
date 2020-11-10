@@ -22,17 +22,17 @@ public class TestRunner<I, O> {
 		System.out.println("\nTest \"" + testName + "\"");
 
 		dataSource.forEachRemaining(testData -> {
-			final Instant startTime = Instant.now();
 			final I arguments = testCase.getArguments(testData.getInput());
+			final Instant startTime = Instant.now();
 			final O result = testCase.execute(arguments);
-			final Instant endTime = Instant.now();
+			final long executionTime = Duration.between(startTime, Instant.now()).toMillis();
 
 			try {
 				final O expectedResult = testCase.getExpectedResult(testData.getOutput());
 				assertEquals(expectedResult, result);
-				System.out.println("SUCCESS, Execution time " + Duration.between(startTime, endTime).toMillis() + " ms");
+				System.out.println("SUCCESS, Execution time " + executionTime + " ms");
 			} catch (AssertionFailedError e) {
-				System.out.println("FAILED, " + e.getMessage());
+				System.out.println("FAILED, " + e.getMessage() + ",  Execution time: " + executionTime + " ms");
 			}
 		});
 	}
