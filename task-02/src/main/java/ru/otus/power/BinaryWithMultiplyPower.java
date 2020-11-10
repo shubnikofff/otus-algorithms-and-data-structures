@@ -1,6 +1,11 @@
 package ru.otus.power;
 
-public class BinaryWithMultiply extends AbstractPower {
+public class BinaryWithMultiplyPower extends AbstractPower {
+
+	@Override
+	public String getName() {
+		return "Binary with multiply power";
+	}
 
 	@Override
 	public Double execute(Arguments arguments) {

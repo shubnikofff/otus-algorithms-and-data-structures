@@ -8,6 +8,11 @@ import java.util.stream.Stream;
 public class LuckyTicket implements Testable<Integer, Long> {
 
     @Override
+    public String getName() {
+        return "Lucky ticket";
+    }
+
+    @Override
     public Long execute(Integer digitsNumber) {
         final List<Long> sumList = Stream
                 .generate(() -> 0L)

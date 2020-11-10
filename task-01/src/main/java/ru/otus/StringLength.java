@@ -5,6 +5,11 @@ import java.util.List;
 public class StringLength implements Testable<String, Integer> {
 
     @Override
+    public String getName() {
+        return "String length";
+    }
+
+    @Override
     public Integer execute(String input) {
         return input.length();
     }

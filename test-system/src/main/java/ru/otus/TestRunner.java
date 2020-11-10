@@ -9,17 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestRunner<I, O> {
 
-	private final String testName;
-
 	private final TestDataSource dataSource;
 
-	public TestRunner(String testName, TestDataSource dataSource) {
-		this.testName = testName;
+	public TestRunner(TestDataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 
 	public void run(Testable<I, O> testable) {
-		System.out.println("\nTest \"" + testName + "\"");
+		System.out.println("\nTest \"" + testable.getName() + "\"");
 
 		dataSource.forEachRemaining(testData -> {
 			final I arguments = testable.getArguments(testData.getInput());
