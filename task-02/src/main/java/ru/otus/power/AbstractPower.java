@@ -10,8 +10,6 @@ public abstract class AbstractPower implements Testable<Arguments, Double> {
 
 	private static final int SCALE = 11;
 
-	public abstract Double execute(Arguments arguments);
-
 	@Override
 	public Arguments getArguments(List<String> input) {
 		return new Arguments(Double.parseDouble(input.get(0)), Long.parseLong(input.get(1)));
