@@ -5,10 +5,10 @@ import ru.otus.Testable;
 import java.math.BigInteger;
 import java.util.List;
 
-public abstract class AbstractFibonacci implements Testable<Long, BigInteger> {
+public abstract class AbstractFibonacci implements Testable<Integer, BigInteger> {
 	@Override
-	public Long getArguments(List<String> input) {
-		return Long.parseLong(input.get(0));
+	public Integer getArguments(List<String> input) {
+		return Integer.parseInt(input.get(0));
 	}
 
 	@Override

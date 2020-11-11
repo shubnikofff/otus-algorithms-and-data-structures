@@ -10,7 +10,7 @@ public class IterationFibonacci extends AbstractFibonacci {
 	}
 
 	@Override
-	public BigInteger execute(Long index) {
+	public BigInteger execute(Integer index) {
 		if (index < 2) {
 			return BigInteger.valueOf(index);
 		}
