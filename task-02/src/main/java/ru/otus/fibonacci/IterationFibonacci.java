@@ -3,6 +3,7 @@ package ru.otus.fibonacci;
 import java.math.BigInteger;
 
 public class IterationFibonacci extends AbstractFibonacci {
+
 	@Override
 	public String getName() {
 		return "Iteration Fibonacci";
@@ -10,20 +11,20 @@ public class IterationFibonacci extends AbstractFibonacci {
 
 	@Override
 	public BigInteger execute(Long index) {
-		if (index == 0) {
-			return BigInteger.valueOf(0);
+		if (index < 2) {
+			return BigInteger.valueOf(index);
 		}
 
-		BigInteger first = BigInteger.valueOf(0);
-		BigInteger second = BigInteger.valueOf(1);
+		BigInteger prev = BigInteger.valueOf(1);
+		BigInteger result = BigInteger.valueOf(1);
 		BigInteger tmp;
 
-		for (long i = 1; i < index; i++) {
-			tmp = first.add(second);
-			first = second;
-			second = tmp;
+		for (long i = 2; i < index; i++) {
+			tmp = prev.add(result);
+			prev = result;
+			result = tmp;
 		}
 
-		return second;
+		return result;
 	}
 }
