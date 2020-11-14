@@ -1,6 +1,6 @@
 package ru.otus.prime;
 
-public class SimpleIterationPrime extends AbstractIterationPrime {
+public class IterationPrime extends AbstractIterationPrime {
     @Override
     protected boolean isPrime(int number) {
         int primesCount = 0;
@@ -16,6 +16,6 @@ public class SimpleIterationPrime extends AbstractIterationPrime {
 
     @Override
     public String getName() {
-        return "Simple Iteration Prime";
+        return "Iteration Prime";
     }
 }

@@ -1,10 +1,18 @@
 package ru.otus.prime;
 
-public class SqrtDividerIterationPrime extends AbstractIterationPrime {
+public class OptimizedIterationPrime extends AbstractIterationPrime {
     @Override
     protected boolean isPrime(int number) {
+        if(number == 2) {
+            return true;
+        }
+
+        if(number % 2 == 0) {
+            return false;
+        }
+
         final double sqrt = Math.sqrt(number);
-        for (int i = 2; i <= sqrt; i++) {
+        for (int i = 3; i <= sqrt; i += 2) {
             if (number % i == 0) {
                 return false;
             }
@@ -15,6 +23,6 @@ public class SqrtDividerIterationPrime extends AbstractIterationPrime {
 
     @Override
     public String getName() {
-        return "Square root Divider Iteration Prime";
+        return "Optimized Iteration Prime";
     }
 }

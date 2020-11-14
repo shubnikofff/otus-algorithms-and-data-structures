@@ -18,11 +18,10 @@ public class Main {
 		TestRunner.run(new GoldenRatioFibonacci(), new TestDataSource("fibonacci"));
 		TestRunner.run(new MatrixMultiplyFibonacci(), new TestDataSource("fibonacci"));
 
-		TestRunner.run(new SimpleIterationPrime(), new TestDataSource("primes"));
-		TestRunner.run(new OptimizedSimpleIterationPrime(), new TestDataSource("primes"));
-		TestRunner.run(new HalfDividerIterationPrime(), new TestDataSource("primes"));
-		TestRunner.run(new SqrtDividerIterationPrime(), new TestDataSource("primes"));
-		TestRunner.run(new SqrtDividerExcludeEvenIterationPrime(), new TestDataSource("primes"));
-		TestRunner.run(new CachedPrime(), new TestDataSource("primes"));
+		TestRunner.run(new IterationPrime(), new TestDataSource("primes"));
+		TestRunner.run(new OptimizedIterationPrime(), new TestDataSource("primes"));
+		TestRunner.run(new CachedIterationPrime(), new TestDataSource("primes"));
+		TestRunner.run(new EratosthenesSieve(), new TestDataSource("primes"));
+		TestRunner.run(new LinearEratosthenesSieve(), new TestDataSource("primes"));
 	}
 }

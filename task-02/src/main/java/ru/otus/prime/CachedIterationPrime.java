@@ -3,7 +3,7 @@ package ru.otus.prime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CachedPrime extends AbstractPrime {
+public class CachedIterationPrime extends AbstractPrime {
 
     private final List<Integer> primes = new ArrayList<>();
 
@@ -40,6 +40,6 @@ public class CachedPrime extends AbstractPrime {
 
     @Override
     public String getName() {
-        return "Cached Prime";
+        return "Cached Iteration Prime";
     }
 }
