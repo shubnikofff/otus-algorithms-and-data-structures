@@ -21,7 +21,7 @@ public class Main {
 		TestRunner.run(new IterationPrime(), new TestDataSource("primes"));
 		TestRunner.run(new OptimizedIterationPrime(), new TestDataSource("primes"));
 		TestRunner.run(new CachedIterationPrime(), new TestDataSource("primes"));
-		TestRunner.run(new EratosthenesSieve(), new TestDataSource("primes"));
 		TestRunner.run(new LinearEratosthenesSieve(), new TestDataSource("primes"));
+		TestRunner.run(new EratosthenesSieve(), new TestDataSource("primes"));
 	}
 }
