@@ -23,5 +23,6 @@ public class Main {
 		TestRunner.run(new HalfDividerIterationPrime(), new TestDataSource("primes"));
 		TestRunner.run(new SqrtDividerIterationPrime(), new TestDataSource("primes"));
 		TestRunner.run(new SqrtDividerExcludeEvenIterationPrime(), new TestDataSource("primes"));
+		TestRunner.run(new CachedPrime(), new TestDataSource("primes"));
 	}
 }
