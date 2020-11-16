@@ -1,5 +1,6 @@
 package ru.otus;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public abstract class AbstractBits implements Testable<Integer, Result> {
@@ -11,6 +12,6 @@ public abstract class AbstractBits implements Testable<Integer, Result> {
 
 	@Override
 	public Result getExpectedResult(List<String> output) {
-		return new Result(Integer.parseInt(output.get(0)), Long.parseLong(output.get(1)));
+		return new Result(Integer.parseInt(output.get(0)), output.get(1));
 	}
 }
