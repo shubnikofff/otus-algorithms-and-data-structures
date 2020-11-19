@@ -1,10 +1,9 @@
 package ru.otus;
 
-public class KingBits extends AbstractBits {
+public class KingBits {
 
 	private final static long INVERTED_COLUMN_A = 0xFEFEFEFEFEFEFEFEL;
 	private final static long INVERTED_COLUMN_H = 0x7F7F7F7F7F7F7F7FL;
-
 
 //	@Override
 //	public Result execute(Integer input) {
@@ -29,7 +28,6 @@ public class KingBits extends AbstractBits {
 //
 //	}
 
-	@Override
 	public Result execute(Integer input) {
 		final long position = 1L << input;
 		final long leftBoard = position & INVERTED_COLUMN_A;
@@ -38,6 +36,7 @@ public class KingBits extends AbstractBits {
 				leftBoard >>> 1 | rightBoard << 1 |
 				leftBoard >>> 9 | position >>> 8 | rightBoard >>> 7;
 
+		// TODO implement popcnt
 		return new Result(Long.bitCount(mask), Long.toUnsignedString(mask));
 	}
 
@@ -49,10 +48,5 @@ public class KingBits extends AbstractBits {
 		}
 
 		return count;
-	}
-
-	@Override
-	public String getName() {
-		return "King";
 	}
 }
