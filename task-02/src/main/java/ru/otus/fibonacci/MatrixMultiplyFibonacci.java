@@ -2,17 +2,11 @@ package ru.otus.fibonacci;
 
 import java.math.BigInteger;
 
-public class MatrixMultiplyFibonacci extends AbstractFibonacci {
+public class MatrixMultiplyFibonacci {
 
-	@Override
-	public String getName() {
-		return "Matrix Multiply Fibonacci";
-	}
-
-	@Override
-	public BigInteger execute(Integer index) {
+	public static BigInteger count(int index) {
 		if (index < 2) {
-			return BigInteger.valueOf(1);
+			return BigInteger.valueOf(1L);
 		}
 
 		Matrix base = Matrix.initial();

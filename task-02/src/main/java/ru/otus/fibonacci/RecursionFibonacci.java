@@ -2,19 +2,13 @@ package ru.otus.fibonacci;
 
 import java.math.BigInteger;
 
-public class RecursionFibonacci extends AbstractFibonacci {
+public class RecursionFibonacci {
 
-	@Override
-	public String getName() {
-		return "Recursion Fibonacci";
-	}
-
-	@Override
-	public BigInteger execute(Integer index) {
+	public static BigInteger count(int index) {
 		if (index < 2) {
 			return BigInteger.valueOf(index);
 		}
 
-		return execute(index - 1).add(execute(index - 2));
+		return count(index - 1).add(count(index - 2));
 	}
 }

@@ -3,12 +3,11 @@ package ru.otus.prime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CachedIterationPrime extends AbstractPrime {
+public class CachedIterationPrime {
 
-    private final List<Integer> primes = new ArrayList<>();
+    private static final List<Integer> primes = new ArrayList<>();
 
-    @Override
-    public Integer execute(Integer number) {
+    public static int count(int number) {
         primes.clear();
         for (int i = 2; i <= number; i++) {
             if (isPrime(i)) {
@@ -19,7 +18,7 @@ public class CachedIterationPrime extends AbstractPrime {
         return primes.size();
     }
 
-    private boolean isPrime(int number) {
+    private static boolean isPrime(int number) {
         if(number % 2 == 0) {
             return number == 2;
         }
@@ -36,10 +35,5 @@ public class CachedIterationPrime extends AbstractPrime {
         }
 
         return true;
-    }
-
-    @Override
-    public String getName() {
-        return "Cached Iteration Prime";
     }
 }
