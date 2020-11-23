@@ -18,7 +18,11 @@ class BitsTest {
         return DynamicTest.stream(
                 new TestDataSource("king"),
                 testData -> "With position: " + testData.getInput().get(0),
-                testData -> assertEquals(getExpectedResult(testData), KingBits.calculate(getArgument(testData)))
+                testData -> {
+                    final String bitMask = KingBits.bitMask(getArgument(testData));
+                    assertEquals(getExpectedBitmask(testData), bitMask);
+                    assertEquals(getExpectedMovesCount(testData), PopulationCounter.count(bitMask));
+                }
         );
     }
 
@@ -26,7 +30,11 @@ class BitsTest {
         return Integer.parseInt(testData.getInput().get(0));
     }
 
-    private static Result getExpectedResult(TestData testData) {
-        return new Result(Integer.parseInt(testData.getOutput().get(0)), testData.getOutput().get(1));
+    private static int getExpectedMovesCount(TestData testData) {
+        return Integer.parseInt(testData.getOutput().get(0));
+    }
+
+    private static String getExpectedBitmask(TestData testData) {
+        return testData.getOutput().get(1);
     }
 }

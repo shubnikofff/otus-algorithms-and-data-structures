@@ -26,8 +26,8 @@ public class PopulationCounter {
             entry(15, 4)
     );
 
-    static int count(long mask) {
-        BigInteger absMask = new BigInteger(Long.toUnsignedString(mask));
+    static int count(String mask) {
+        BigInteger absMask = new BigInteger(mask);
         int count = 0;
 
         while (absMask.compareTo(BigInteger.ZERO) > 0) {
