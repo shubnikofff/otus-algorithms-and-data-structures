@@ -19,7 +19,21 @@ class BitsTest {
                 new TestDataSource("king"),
                 testData -> "With position: " + testData.getInput().get(0),
                 testData -> {
-                    final String bitMask = KingBits.bitMask(getArgument(testData));
+                    final String bitMask = KingBitMask.calculate(getArgument(testData));
+                    assertEquals(getExpectedBitmask(testData), bitMask);
+                    assertEquals(getExpectedMovesCount(testData), PopulationCounter.count(bitMask));
+                }
+        );
+    }
+
+    @TestFactory
+    @DisplayName("Knight")
+    Stream<DynamicTest> testKnight() {
+        return DynamicTest.stream(
+                new TestDataSource("knight"),
+                testData -> "With position: " + testData.getInput().get(0),
+                testData -> {
+                    final String bitMask = KnightBitMask.calculate(getArgument(testData));
                     assertEquals(getExpectedBitmask(testData), bitMask);
                     assertEquals(getExpectedMovesCount(testData), PopulationCounter.count(bitMask));
                 }
