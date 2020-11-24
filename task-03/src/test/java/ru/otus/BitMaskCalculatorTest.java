@@ -54,6 +54,20 @@ class BitMaskCalculatorTest {
         );
     }
 
+    @TestFactory
+    @DisplayName("For Rook")
+    Stream<DynamicTest> testRook() {
+        return DynamicTest.stream(
+                new TestDataSource("rook"),
+                testData -> "With position: " + testData.getInput().get(0),
+                testData -> {
+                    final String bitMask = RookBitMaskCalculator.calculate(getArgument(testData));
+                    assertEquals(getExpectedBitmask(testData), bitMask);
+                    assertEquals(getExpectedMovesCount(testData), PopulationCounter.count(bitMask));
+                }
+        );
+    }
+
     private static int getArgument(TestData testData) {
         return Integer.parseInt(testData.getInput().get(0));
     }
