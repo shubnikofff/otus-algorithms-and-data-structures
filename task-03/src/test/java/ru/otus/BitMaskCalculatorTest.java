@@ -10,16 +10,16 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class BitsTest {
+class BitMaskCalculatorTest {
 
     @TestFactory
-    @DisplayName("King")
+    @DisplayName("For King")
     Stream<DynamicTest> testKing() {
         return DynamicTest.stream(
                 new TestDataSource("king"),
                 testData -> "With position: " + testData.getInput().get(0),
                 testData -> {
-                    final String bitMask = KingBitMask.calculate(getArgument(testData));
+                    final String bitMask = KingBitMaskCalculator.calculate(getArgument(testData));
                     assertEquals(getExpectedBitmask(testData), bitMask);
                     assertEquals(getExpectedMovesCount(testData), PopulationCounter.count(bitMask));
                 }
@@ -27,13 +27,27 @@ class BitsTest {
     }
 
     @TestFactory
-    @DisplayName("Knight")
+    @DisplayName("For Knight")
     Stream<DynamicTest> testKnight() {
         return DynamicTest.stream(
                 new TestDataSource("knight"),
                 testData -> "With position: " + testData.getInput().get(0),
                 testData -> {
-                    final String bitMask = KnightBitMask.calculate(getArgument(testData));
+                    final String bitMask = KnightBitMaskCalculator.calculate(getArgument(testData));
+                    assertEquals(getExpectedBitmask(testData), bitMask);
+                    assertEquals(getExpectedMovesCount(testData), PopulationCounter.count(bitMask));
+                }
+        );
+    }
+
+    @TestFactory
+    @DisplayName("For Bishop")
+    Stream<DynamicTest> testBishop() {
+        return DynamicTest.stream(
+                new TestDataSource("bishop"),
+                testData -> "With position: " + testData.getInput().get(0),
+                testData -> {
+                    final String bitMask = BishopBitMaskCalculator.calculate(getArgument(testData));
                     assertEquals(getExpectedBitmask(testData), bitMask);
                     assertEquals(getExpectedMovesCount(testData), PopulationCounter.count(bitMask));
                 }
