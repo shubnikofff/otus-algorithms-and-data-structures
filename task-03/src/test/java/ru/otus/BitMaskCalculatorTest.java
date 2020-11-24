@@ -68,6 +68,20 @@ class BitMaskCalculatorTest {
         );
     }
 
+    @TestFactory
+    @DisplayName("For Queen")
+    Stream<DynamicTest> testQueen() {
+        return DynamicTest.stream(
+                new TestDataSource("queen"),
+                testData -> "With position: " + testData.getInput().get(0),
+                testData -> {
+                    final String bitMask = QueenBitMaskCalculator.calculate(getArgument(testData));
+                    assertEquals(getExpectedBitmask(testData), bitMask);
+                    assertEquals(getExpectedMovesCount(testData), PopulationCounter.count(bitMask));
+                }
+        );
+    }
+
     private static int getArgument(TestData testData) {
         return Integer.parseInt(testData.getInput().get(0));
     }
