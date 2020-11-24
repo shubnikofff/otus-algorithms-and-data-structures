@@ -7,33 +7,24 @@ import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestRunner<I, O> {
+public class TestRunner {
 
-	private final String testName;
+    public static <I, O> void run(Testable<I, O> testable, TestDataSource dataSource) {
+        System.out.println("\nTest \"" + testable.getName() + "\"");
 
-	private final TestDataSource dataSource;
+        for (TestData testData : dataSource) {
+            final I arguments = testable.getArguments(testData.getInput());
+            final Instant startTime = Instant.now();
+            final O result = testable.execute(arguments);
+            final long executionTime = Duration.between(startTime, Instant.now()).toMillis();
 
-	public TestRunner(String testName, TestDataSource dataSource) {
-		this.testName = testName;
-		this.dataSource = dataSource;
-	}
-
-	public void run(TestCase<I, O> testCase) {
-		System.out.println("\nTest \"" + testName + "\"");
-
-		dataSource.forEachRemaining(testData -> {
-			final Instant startTime = Instant.now();
-			final I arguments = testCase.getArguments(testData.getInput());
-			final O result = testCase.execute(arguments);
-			final Instant endTime = Instant.now();
-
-			try {
-				final O expectedResult = testCase.getExpectedResult(testData.getOutput());
-				assertEquals(expectedResult, result);
-				System.out.println("SUCCESS, Execution time " + Duration.between(startTime, endTime).toMillis() + " ms");
-			} catch (AssertionFailedError e) {
-				System.out.println("FAILED, " + e.getMessage());
-			}
-		});
-	}
+            try {
+                final O expectedResult = testable.getExpectedResult(testData.getOutput());
+                assertEquals(expectedResult, result);
+                System.out.println("SUCCESS, Execution time " + executionTime + " ms");
+            } catch (AssertionFailedError e) {
+                System.out.println("FAILED, " + e.getMessage() + ",  Execution time: " + executionTime + " ms");
+            }
+        }
+    }
 }

@@ -5,7 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-public class LuckyTicket implements TestCase<Integer, Long> {
+public class LuckyTicket implements Testable<Integer, Long> {
+
+    @Override
+    public String getName() {
+        return "Lucky ticket";
+    }
 
     @Override
     public Long execute(Integer digitsNumber) {

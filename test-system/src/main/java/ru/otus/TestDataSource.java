@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class TestDataSource implements Iterator<TestData> {
+public class TestDataSource implements Iterator<TestData>, Iterable<TestData> {
 
     private int index = 0;
 
@@ -50,5 +50,10 @@ public class TestDataSource implements Iterator<TestData> {
     private List<String> readFile(URL resource) throws IOException, URISyntaxException {
         final Path path = Paths.get(resource.toURI());
         return Files.readAllLines(path);
+    }
+
+    @Override
+    public Iterator<TestData> iterator() {
+        return this;
     }
 }
