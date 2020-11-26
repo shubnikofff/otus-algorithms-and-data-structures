@@ -1,13 +1,12 @@
 package ru.otus.array;
 
-import java.util.Arrays;
-
 import static java.lang.System.arraycopy;
 
 public class SingleArray<T> implements DynamicArray<T> {
 
     private Object[] array = new Object[0];
 
+    @Override
     public void add(T item, int index) {
         final Object[] newArray = new Object[array.length + 1];
 
@@ -18,6 +17,8 @@ public class SingleArray<T> implements DynamicArray<T> {
         array = newArray;
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
     public T remove(int index) {
         final T result = (T) array[index];
         final Object[] newArray = new Object[array.length - 1];
