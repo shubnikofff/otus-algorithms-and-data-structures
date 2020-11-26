@@ -1,14 +1,8 @@
 package ru.otus.power;
 
-public class IterationPower extends AbstractPower {
+public class IterationPower {
 
-	@Override
-	public String getName() {
-		return "Iteration power";
-	}
-
-	@Override
-	public Double execute(Arguments arguments) {
+	public static double count(Arguments arguments) {
 		final double base = arguments.getBase();
 		final long power = arguments.getPower();
 
@@ -18,6 +12,6 @@ public class IterationPower extends AbstractPower {
 			result = result * base;
 		}
 
-		return roundDouble(result);
+		return PowerUtil.roundDouble(result);
 	}
 }

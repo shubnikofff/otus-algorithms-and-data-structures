@@ -2,10 +2,9 @@ package ru.otus.prime;
 
 import java.util.Arrays;
 
-public class EratosthenesSieve extends AbstractPrime {
+public class EratosthenesSieve {
 
-	@Override
-	public Integer execute(Integer number) {
+	public static int countPrimes(int number) {
 		final boolean[] isPrime = new boolean[number + 1];
 		Arrays.fill(isPrime, true);
 
@@ -25,10 +24,5 @@ public class EratosthenesSieve extends AbstractPrime {
 		}
 
 		return result;
-	}
-
-	@Override
-	public String getName() {
-		return "Sieve of Eratosthenes";
 	}
 }

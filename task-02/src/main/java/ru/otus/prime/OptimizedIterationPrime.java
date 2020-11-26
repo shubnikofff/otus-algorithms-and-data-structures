@@ -1,6 +1,7 @@
 package ru.otus.prime;
 
 public class OptimizedIterationPrime extends AbstractIterationPrime {
+
     @Override
     protected boolean isPrime(int number) {
         if(number == 2) {
@@ -19,10 +20,5 @@ public class OptimizedIterationPrime extends AbstractIterationPrime {
         }
 
         return true;
-    }
-
-    @Override
-    public String getName() {
-        return "Optimized Iteration Prime";
     }
 }
