@@ -8,13 +8,17 @@ public class SingleArray<T> implements DynamicArray<T> {
 
     @Override
     public void add(T item, int index) {
+        if (index > array.length) {
+            throw new ArrayIndexOutOfBoundsException(index);
+        }
+
         final Object[] newArray = new Object[array.length + 1];
 
         arraycopy(array, 0, newArray, 0, index);
-        newArray[index] = item;
         arraycopy(array, index, newArray, index + 1, array.length - index);
-
         array = newArray;
+
+        array[index] = item;
     }
 
     @Override
@@ -29,5 +33,16 @@ public class SingleArray<T> implements DynamicArray<T> {
         array = newArray;
 
         return result;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public T get(int index) {
+        return (T) array[index];
+    }
+
+    @Override
+    public int size() {
+        return array.length;
     }
 }

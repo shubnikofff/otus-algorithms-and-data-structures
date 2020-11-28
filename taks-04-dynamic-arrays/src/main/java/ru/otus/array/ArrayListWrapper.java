@@ -16,4 +16,14 @@ public class ArrayListWrapper<T> implements DynamicArray<T> {
     public T remove(int index) {
         return list.remove(index);
     }
+
+    @Override
+    public T get(int index) {
+        return list.get(index);
+    }
+
+    @Override
+    public int size() {
+        return list.size();
+    }
 }
