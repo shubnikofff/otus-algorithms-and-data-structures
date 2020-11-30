@@ -29,8 +29,13 @@ public class MatrixArray<T> implements DynamicArray<T> {
 			array.add((T[]) new Object[vector], array.size());
 		}
 
-		for (int i = size; i > index; i--) {
-			array.get(i / vector)[index % vector + 1] = get(index);
+		final boolean indexIsNotBorder = index % vector + 1 < vector;
+		for (int i = array.size() * vector - 2; i >= index; i--) {
+			if (indexIsNotBorder) {
+				array.get(i / vector)[index % vector + 1] = get(i);
+			} else {
+				array.get(array.size() - 1)[0] = get(i);
+			}
 		}
 
 		array.get(index / vector)[index % vector] = item;
@@ -42,7 +47,7 @@ public class MatrixArray<T> implements DynamicArray<T> {
 		final T result = get(index);
 
 		for (int i = index; i < size - 1; i++) {
-			array.get(i / vector)[i % vector] = get(i  + 1);
+			array.get(i / vector)[i % vector] = get(i + 1);
 		}
 
 		size--;
