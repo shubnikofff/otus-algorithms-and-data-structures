@@ -13,51 +13,72 @@ public class Benchmark<T> {
 
     private final T arrayItem;
 
-    private final long insertsNumber;
+    private final long operationsNumber;
 
-    public Benchmark(Supplier<DynamicArray<T>> arrayFactory, T arrayItem, long insertsNumber) {
+    public Benchmark(Supplier<DynamicArray<T>> arrayFactory, T arrayItem, long operationsNumber) {
         this.arrayFactory = arrayFactory;
         this.arrayItem = arrayItem;
-        this.insertsNumber = insertsNumber;
+        this.operationsNumber = operationsNumber;
     }
 
-    public void measure() {
-        System.out.printf("Insert at the beginning: %d ms\n", insertBegin().toMillis());
-        System.out.printf("Insert at the end: %d ms\n", insertEnd().toMillis());
-        System.out.printf("Insert at the random place: %d ms\n", insertRandom().toMillis());
+    public void run() {
+        System.out.println("Operations at the beginning: " + operationsBegin());
+        System.out.println("Operations at the end: " + operationsEnd());
+        System.out.println("Operations in a random place: " + operationsRandom());
     }
 
-    private Duration insertBegin() {
+    private BenchmarkResult operationsBegin() {
         final DynamicArray<T> array = arrayFactory.get();
-        final Instant startTime = Instant.now();
 
-        for (long i = 0; i < insertsNumber; i++) {
+        Instant startTime = Instant.now();
+        for (long i = 0; i < operationsNumber; i++) {
             array.add(arrayItem, 0);
         }
+        final Duration insertTime = Duration.between(startTime, Instant.now());
 
-        return Duration.between(startTime, Instant.now());
+        startTime = Instant.now();
+        for (int i = 0; i < operationsNumber; i++) {
+            array.remove(0);
+        }
+        final Duration removeTime = Duration.between(startTime, Instant.now());
+
+        return new BenchmarkResult(insertTime, removeTime);
     }
 
-    private Duration insertEnd() {
+    private BenchmarkResult operationsEnd() {
         final DynamicArray<T> array = arrayFactory.get();
-        final Instant startTime = Instant.now();
 
-        for (long i = 0; i < insertsNumber; i++) {
+        Instant startTime = Instant.now();
+        for (long i = 0; i < operationsNumber; i++) {
             array.add(arrayItem, array.size());
         }
+        final Duration insertTime = Duration.between(startTime, Instant.now());
 
-        return Duration.between(startTime, Instant.now());
+        startTime = Instant.now();
+        for (int i = 0; i < operationsNumber; i++) {
+            array.remove(array.size() - 1);
+        }
+        final Duration removeTime = Duration.between(startTime, Instant.now());
+
+        return new BenchmarkResult(insertTime, removeTime);
     }
 
-    private Duration insertRandom() {
+    private BenchmarkResult operationsRandom() {
         final DynamicArray<T> array = arrayFactory.get();
         final Random random = new Random();
-        final Instant startTime = Instant.now();
 
-        for (long i = 0; i < insertsNumber; i++) {
+        Instant startTime = Instant.now();
+        for (long i = 0; i < operationsNumber; i++) {
             array.add(arrayItem, random.nextInt(array.size() + 1));
         }
+        final Duration insertTime = Duration.between(startTime, Instant.now());
 
-        return Duration.between(startTime, Instant.now());
+        startTime = Instant.now();
+        for (int i = 0; i < operationsNumber; i++) {
+            array.remove(random.nextInt(array.size()));
+        }
+        final Duration removeTime = Duration.between(startTime, Instant.now());
+
+        return new BenchmarkResult(insertTime, removeTime);
     }
 }

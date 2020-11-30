@@ -44,7 +44,7 @@ public class VectorArray<T> implements DynamicArray<T> {
 	public T remove(int index) {
 		final T result = (T) array[index];
 
-		System.arraycopy(array, index + 1, array, index, size - index);
+		System.arraycopy(array, index + 1, array, index, size - index - 1);
 		size--;
 
 		return result;
