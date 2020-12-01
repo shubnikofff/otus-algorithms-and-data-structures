@@ -1,14 +1,8 @@
 package ru.otus.power;
 
-public class BinaryWithMultiplyPower extends AbstractPower {
+public class BinaryWithMultiplyPower {
 
-	@Override
-	public String getName() {
-		return "Binary with multiply power";
-	}
-
-	@Override
-	public Double execute(Arguments arguments) {
+	public static double count(Arguments arguments) {
 		final long power = arguments.getPower();
 		final double base = arguments.getBase();
 
@@ -29,6 +23,6 @@ public class BinaryWithMultiplyPower extends AbstractPower {
 			i++;
 		}
 
-		return roundDouble(result);
+		return PowerUtil.roundDouble(result);
 	}
 }

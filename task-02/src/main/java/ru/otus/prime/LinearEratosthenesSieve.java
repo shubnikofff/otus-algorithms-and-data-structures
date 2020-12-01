@@ -2,10 +2,9 @@ package ru.otus.prime;
 
 import java.util.*;
 
-public class LinearEratosthenesSieve extends AbstractPrime {
+public class LinearEratosthenesSieve {
 
-	@Override
-	public Integer execute(Integer number) {
+	public static int countPrimes(int number) {
 
 		int primeNumbersCount = 0;
 		final int[] lp = new int[number + 1];
@@ -17,16 +16,11 @@ public class LinearEratosthenesSieve extends AbstractPrime {
 				pr.put(primeNumbersCount++, i);
 			}
 
-			for (int j = 0; j < primeNumbersCount && (pr.get(j) <= lp[i] && pr.get(j) * i <= number); j++) {
-				lp[pr.get(j) * i] = pr.get(j);
+			for (int p = 0; p < primeNumbersCount && (pr.get(p) <= lp[i] && pr.get(p) * i <= number); p++) {
+				lp[pr.get(p) * i] = pr.get(p);
 			}
 		}
 
 		return primeNumbersCount;
-	}
-
-	@Override
-	public String getName() {
-		return "Sieve of Eratosthenes (linear complexity)";
 	}
 }

@@ -2,15 +2,9 @@ package ru.otus.fibonacci;
 
 import java.math.BigInteger;
 
-public class IterationFibonacci extends AbstractFibonacci {
+public class IterationFibonacci {
 
-	@Override
-	public String getName() {
-		return "Iteration Fibonacci";
-	}
-
-	@Override
-	public BigInteger execute(Integer index) {
+	public static BigInteger count(int index) {
 		if (index < 2) {
 			return BigInteger.valueOf(index);
 		}

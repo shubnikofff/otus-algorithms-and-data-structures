@@ -1,14 +1,8 @@
 package ru.otus.power;
 
-public class FastPower extends AbstractPower {
+public class FastPower {
 
-	@Override
-	public String getName() {
-		return "Fast power";
-	}
-
-	@Override
-	public Double execute(Arguments arguments) {
+	public static double count(Arguments arguments) {
 		double base = arguments.getBase();
 		long power = arguments.getPower();
 
@@ -27,6 +21,6 @@ public class FastPower extends AbstractPower {
 			result *= base;
 		}
 
-		return roundDouble(result);
+		return PowerUtil.roundDouble(result);
 	}
 }

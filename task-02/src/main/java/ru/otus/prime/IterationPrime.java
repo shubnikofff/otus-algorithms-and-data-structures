@@ -13,9 +13,4 @@ public class IterationPrime extends AbstractIterationPrime {
 
         return primesCount == 2;
     }
-
-    @Override
-    public String getName() {
-        return "Iteration Prime";
-    }
 }

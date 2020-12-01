@@ -5,15 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-public class LuckyTicket implements Testable<Integer, Long> {
+public class LuckyTicket {
 
-    @Override
-    public String getName() {
-        return "Lucky ticket";
-    }
-
-    @Override
-    public Long execute(Integer digitsNumber) {
+    static long count(int digitsNumber) {
         final List<Long> sumList = Stream
                 .generate(() -> 0L)
                 .limit(digitsNumber * 9 + 1)
@@ -37,15 +31,5 @@ public class LuckyTicket implements Testable<Integer, Long> {
         }
 
         return sum;
-    }
-
-    @Override
-    public Integer getArguments(List<String> input) {
-        return Integer.parseInt(input.get(0));
-    }
-
-    @Override
-    public Long getExpectedResult(List<String> output) {
-        return Long.parseLong(output.get(0));
     }
 }

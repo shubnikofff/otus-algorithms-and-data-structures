@@ -1,9 +1,8 @@
 package ru.otus.prime;
 
-public abstract class AbstractIterationPrime extends AbstractPrime {
+public abstract class AbstractIterationPrime {
 
-    @Override
-    public Integer execute(Integer input) {
+    public int count(int input) {
         int result = 0;
 
         for (int i = 2; i <= input; i++) {
