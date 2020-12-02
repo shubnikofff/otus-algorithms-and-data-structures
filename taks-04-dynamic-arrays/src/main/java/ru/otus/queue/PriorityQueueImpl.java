@@ -9,13 +9,14 @@ public class PriorityQueueImpl<T> implements PriorityQueue<T> {
 
 	@Override
 	public void enqueue(int priority, T item) {
-		int insertIndex = 0;
+		if(array.size() == 0) {
+			array.add(new PriorityQueueItem<>(item, priority), 0);
+			return;
+		}
 
-		for (int i = 0; i < array.size(); i++) {
-			if (array.get(i).getPriority() < priority) {
-				insertIndex = i;
-				break;
-			}
+		int insertIndex = 0;
+		while (insertIndex < array.size() && priority > array.get(insertIndex).getPriority()) {
+			insertIndex++;
 		}
 
 		array.add(new PriorityQueueItem<>(item, priority), insertIndex);
@@ -24,10 +25,5 @@ public class PriorityQueueImpl<T> implements PriorityQueue<T> {
 	@Override
 	public T dequeue() {
 		return array.remove(array.size() - 1).getItem();
-	}
-
-	@Override
-	public int size() {
-		return array.size();
 	}
 }
