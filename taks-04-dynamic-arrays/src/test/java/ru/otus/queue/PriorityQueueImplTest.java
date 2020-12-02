@@ -13,10 +13,10 @@ class PriorityQueueImplTest {
 	void setUp() {
 		queue = new PriorityQueueImpl<>();
 		queue.enqueue(2, 100);
-		queue.enqueue(1, 200);
+		queue.enqueue(-1, 200);
 		queue.enqueue(1, 300);
 		queue.enqueue(3, 400);
-		queue.enqueue(2, 500);
+		queue.enqueue(-2, 500);
 	}
 
 	@Test
