@@ -18,9 +18,12 @@ class ArrayListWrapperTest {
 
 	@Test
 	void add() {
+		arrayListWrapper.add(300, 1);
 		assertEquals(100, arrayListWrapper.get(0));
-		assertEquals(200, arrayListWrapper.get(1));
-
+		assertEquals(300, arrayListWrapper.get(1));
+		assertEquals(200, arrayListWrapper.get(2));
+		assertEquals(3, arrayListWrapper.size());
+		
 		assertThrows(IndexOutOfBoundsException.class, () -> arrayListWrapper.add(300, 100));
 	}
 

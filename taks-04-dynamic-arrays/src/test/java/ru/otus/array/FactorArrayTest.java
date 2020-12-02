@@ -18,8 +18,11 @@ class FactorArrayTest {
 
 	@Test
 	void add() {
+		factorArray.add(300, 1);
 		assertEquals(100, factorArray.get(0));
-		assertEquals(200, factorArray.get(1));
+		assertEquals(300, factorArray.get(1));
+		assertEquals(200, factorArray.get(2));
+		assertEquals(3, factorArray.size());
 
 		assertThrows(ArrayIndexOutOfBoundsException.class, () -> factorArray.add(300, 100));
 	}

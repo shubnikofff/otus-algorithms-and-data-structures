@@ -18,8 +18,11 @@ class SingleArrayTest {
 
 	@Test
 	void add() {
+		singleArray.add(300, 1);
 		assertEquals(100, singleArray.get(0));
-		assertEquals(200, singleArray.get(1));
+		assertEquals(300, singleArray.get(1));
+		assertEquals(200, singleArray.get(2));
+		assertEquals(3, singleArray.size());
 
 		assertThrows(ArrayIndexOutOfBoundsException.class, () -> singleArray.add(300, 100));
 	}

@@ -18,8 +18,11 @@ class VectorArrayTest {
 
 	@Test
 	void add() {
+		vectorArray.add(300, 1);
 		assertEquals(100, vectorArray.get(0));
-		assertEquals(200, vectorArray.get(1));
+		assertEquals(300, vectorArray.get(1));
+		assertEquals(200, vectorArray.get(2));
+		assertEquals(3, vectorArray.size());
 
 		assertThrows(ArrayIndexOutOfBoundsException.class, () -> vectorArray.add(300, 100));
 	}

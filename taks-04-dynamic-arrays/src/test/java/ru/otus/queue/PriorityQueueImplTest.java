@@ -21,15 +21,15 @@ class PriorityQueueImplTest {
 
 	@Test
 	void enqueue() {
-		queue.enqueue(3, 600);
+		queue.enqueue(2, 600);
 
-		assertEquals(6, queue.size());
 		assertEquals(400, queue.dequeue());
-		assertEquals(600, queue.dequeue());
+		assertEquals(100, queue.dequeue());
 	}
 
 	@Test
 	void dequeue() {
 		assertEquals(400, queue.dequeue());
+		assertEquals(100, queue.dequeue());
 	}
 }

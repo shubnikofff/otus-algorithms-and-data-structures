@@ -20,9 +20,11 @@ class MatrixArrayTest {
 
 	@Test
 	void add() {
+		matrixArray.add(300, 1);
 		assertEquals(100, matrixArray.get(0));
-		assertEquals(200, matrixArray.get(1));
-
+		assertEquals(300, matrixArray.get(1));
+		assertEquals(200, matrixArray.get(2));
+		assertEquals(5, matrixArray.size());
 		assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrixArray.add(300, 100));
 	}
 
