@@ -25,6 +25,7 @@ class PriorityQueueImplTest {
 
 		assertEquals(400, queue.dequeue());
 		assertEquals(100, queue.dequeue());
+		assertEquals(600, queue.dequeue());
 	}
 
 	@Test
