@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-class InsertionSortTest {
+class ShellSortTest {
 
     @TestFactory
     @DisplayName("Random array")
@@ -19,7 +19,7 @@ class InsertionSortTest {
                 testData -> "with length " + testData.getInput().get(0),
                 testData -> assertArrayEquals(
                         TestDataConverter.toExpectedResult(testData),
-                        InsertionSort.sort(TestDataConverter.toArgument(testData))
+                        ShellSort.sort(TestDataConverter.toArgument(testData))
                 )
         );
     }
@@ -32,7 +32,7 @@ class InsertionSortTest {
                 testData -> "with length " + testData.getInput().get(0),
                 testData -> assertArrayEquals(
                         TestDataConverter.toExpectedResult(testData),
-                        InsertionSort.sort(TestDataConverter.toArgument(testData))
+                        ShellSort.sort(TestDataConverter.toArgument(testData))
                 ));
     }
 
@@ -44,7 +44,7 @@ class InsertionSortTest {
                 testData -> "with length " + testData.getInput().get(0),
                 testData -> assertArrayEquals(
                         TestDataConverter.toExpectedResult(testData),
-                        InsertionSort.sort(TestDataConverter.toArgument(testData))
+                        ShellSort.sort(TestDataConverter.toArgument(testData))
                 ));
     }
 
@@ -56,7 +56,8 @@ class InsertionSortTest {
                 testData -> "with length " + testData.getInput().get(0),
                 testData -> assertArrayEquals(
                         TestDataConverter.toExpectedResult(testData),
-                        InsertionSort.sort(TestDataConverter.toArgument(testData))
+                        ShellSort.sort(TestDataConverter.toArgument(testData))
                 ));
     }
+
 }
