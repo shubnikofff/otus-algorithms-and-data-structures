@@ -14,6 +14,7 @@
         <module>task-02-algebraic-algorithms</module>
         <module>task-03-bit-arithmetic</module>
         <module>task-04-dynamic-arrays</module>
+        <module>task-05-sorting-algorithms</module>
     </modules>
 
     <properties>
