@@ -4,18 +4,18 @@ public class InsertionSort {
 
     static int[] sort(int[] array) {
 
-        int swapItem, j;
+        int insertItem, j;
 
         for (int i = 0; i < array.length; i++) {
-            swapItem = array[i];
+            insertItem = array[i];
             j = i - 1;
 
-            while (j >= 0 && array[j] > swapItem) {
+            while (j >= 0 && array[j] > insertItem) {
                 array[j + 1] = array[j];
                 j--;
             }
 
-            array[j + 1] = swapItem;
+            array[j + 1] = insertItem;
         }
 
         return array;
