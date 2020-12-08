@@ -10,15 +10,16 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-class ShellSortTest {
+@DisplayName("Shell Sort with Shell sequence")
+class ShellSortShellSequenceTest {
 
 	@TestFactory
 	@DisplayName("Random array")
 	Stream<DynamicTest> testWithRandomArray() {
 		return DynamicTest.stream(
 				new TestDataSource("0.random"),
-				ShellSortTest::generateDisplayName,
-				ShellSortTest::executeTest
+				ShellSortShellSequenceTest::generateDisplayName,
+				ShellSortShellSequenceTest::executeTest
 		);
 	}
 
@@ -27,8 +28,8 @@ class ShellSortTest {
 	Stream<DynamicTest> testWithDigitsArray() {
 		return DynamicTest.stream(
 				new TestDataSource("1.digits"),
-				ShellSortTest::generateDisplayName,
-				ShellSortTest::executeTest
+				ShellSortShellSequenceTest::generateDisplayName,
+				ShellSortShellSequenceTest::executeTest
 		);
 	}
 
@@ -37,8 +38,8 @@ class ShellSortTest {
 	Stream<DynamicTest> testWithSortedArray() {
 		return DynamicTest.stream(
 				new TestDataSource("2.sorted"),
-				ShellSortTest::generateDisplayName,
-				ShellSortTest::executeTest
+				ShellSortShellSequenceTest::generateDisplayName,
+				ShellSortShellSequenceTest::executeTest
 		);
 	}
 
@@ -47,8 +48,8 @@ class ShellSortTest {
 	Stream<DynamicTest> testWithReversedArray() {
 		return DynamicTest.stream(
 				new TestDataSource("3.revers"),
-				ShellSortTest::generateDisplayName,
-				ShellSortTest::executeTest
+				ShellSortShellSequenceTest::generateDisplayName,
+				ShellSortShellSequenceTest::executeTest
 		);
 	}
 
@@ -56,7 +57,7 @@ class ShellSortTest {
 		final int[] expectedResult = TestDataConverter.toExpectedResult(testData);
 		final int[] array = TestDataConverter.toArray(testData);
 
-		ShellSort.sort(array);
+		ShellSort.shellSequence(array);
 
 		assertArrayEquals(expectedResult, array);
 	}

@@ -10,16 +10,16 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-@DisplayName("Insertion Sort")
-class InsertionSortTest {
+@DisplayName("Shell Sort with Knuth sequence")
+class ShellSortKnuthSequenceTest {
 
 	@TestFactory
 	@DisplayName("Random array")
 	Stream<DynamicTest> testWithRandomArray() {
 		return DynamicTest.stream(
 				new TestDataSource("0.random"),
-				InsertionSortTest::generateDisplayName,
-				InsertionSortTest::executeTest
+				ShellSortKnuthSequenceTest::generateDisplayName,
+				ShellSortKnuthSequenceTest::executeTest
 		);
 	}
 
@@ -28,8 +28,8 @@ class InsertionSortTest {
 	Stream<DynamicTest> testWithDigitsArray() {
 		return DynamicTest.stream(
 				new TestDataSource("1.digits"),
-				InsertionSortTest::generateDisplayName,
-				InsertionSortTest::executeTest
+				ShellSortKnuthSequenceTest::generateDisplayName,
+				ShellSortKnuthSequenceTest::executeTest
 		);
 	}
 
@@ -38,8 +38,8 @@ class InsertionSortTest {
 	Stream<DynamicTest> testWithSortedArray() {
 		return DynamicTest.stream(
 				new TestDataSource("2.sorted"),
-				InsertionSortTest::generateDisplayName,
-				InsertionSortTest::executeTest
+				ShellSortKnuthSequenceTest::generateDisplayName,
+				ShellSortKnuthSequenceTest::executeTest
 		);
 	}
 
@@ -48,8 +48,8 @@ class InsertionSortTest {
 	Stream<DynamicTest> testWithReversedArray() {
 		return DynamicTest.stream(
 				new TestDataSource("3.revers"),
-				InsertionSortTest::generateDisplayName,
-				InsertionSortTest::executeTest
+				ShellSortKnuthSequenceTest::generateDisplayName,
+				ShellSortKnuthSequenceTest::executeTest
 		);
 	}
 
@@ -57,7 +57,7 @@ class InsertionSortTest {
 		final int[] expectedResult = TestDataConverter.toExpectedResult(testData);
 		final int[] array = TestDataConverter.toArray(testData);
 
-		InsertionSort.sort(array);
+		ShellSort.knuthSequence(array);
 
 		assertArrayEquals(expectedResult, array);
 	}
@@ -65,4 +65,5 @@ class InsertionSortTest {
 	private static String generateDisplayName(TestData testData) {
 		return "with length " + testData.getInput().get(0);
 	}
+
 }
