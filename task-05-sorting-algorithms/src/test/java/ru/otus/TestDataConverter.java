@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class TestDataConverter {
 
-    static int[] toArgument(TestData testData) {
+    static int[] toArray(TestData testData) {
         return Arrays.stream(testData.getInput().get(1)
                 .split(" "))
                 .mapToInt(Integer::parseInt)

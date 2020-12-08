@@ -2,22 +2,35 @@ package ru.otus;
 
 public class InsertionSort {
 
-    static int[] sort(int[] array) {
+	static void sort(int[] array) {
 
-        int insertItem, j;
+		for (int i = 0; i < array.length; i++) {
+			int buffer = array[i];
+			int j = i - 1;
 
-        for (int i = 0; i < array.length; i++) {
-            insertItem = array[i];
-            j = i - 1;
+			while (j >= 0 && array[j] > buffer) {
+				array[j + 1] = array[j];
+				j--;
+			}
 
-            while (j >= 0 && array[j] > insertItem) {
-                array[j + 1] = array[j];
-                j--;
-            }
+			array[j + 1] = buffer;
+		}
 
-            array[j + 1] = insertItem;
-        }
+	}
 
-        return array;
-    }
+	static void sort(int[] array, int gap) {
+
+		for (int i = 0; i + gap < array.length; i++) {
+			int j = i + gap;
+			int buffer = array[j];
+
+			while (j - gap >= 0 && array[j - gap] > buffer) {
+				array[j] = array[j - gap];
+				j -= gap;
+			}
+
+			array[j] = buffer;
+		}
+
+	}
 }
