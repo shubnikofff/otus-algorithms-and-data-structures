@@ -40,3 +40,7 @@
 | Shell sort with Hibbard sequence | 0  ms | 0 ms| 0 ms | 0 ms | 15 ms | 16 ms | 226 ms |
 | Heap sort | 0  ms | 0 ms| 0 ms | 0 ms | 0 ms | 157 ms | 189 ms |
 
+### Вывод
+Лидерами оказались _Shell sort_ и _Heap sort_, аутсайдерами - _Insertion sort_ и _Selection sort_. 
+Причем _Selection sort_ заметно проигрывает всем остальным на больших числах.
+Возможно это следствие того что первая группа алгоритмов является развитием идеи второй соответственно.
