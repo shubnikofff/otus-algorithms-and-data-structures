@@ -10,7 +10,7 @@ public class HeapSort {
         }
 
         for (int j = size - 1; j >= 0; j--) {
-            swap(array, 0, j);
+            swap(0, j, array);
             recoverHeap(0, j, array);
         }
     }
@@ -32,11 +32,11 @@ public class HeapSort {
             return;
         }
 
-        swap(array, root, max);
+        swap(root, max, array);
         recoverHeap(max, size, array);
     }
 
-    private static void swap(int[] array, int from, int to) {
+    private static void swap(int from, int to, int[] array) {
         final int buffer = array[from];
         array[from] = array[to];
         array[to] = buffer;
