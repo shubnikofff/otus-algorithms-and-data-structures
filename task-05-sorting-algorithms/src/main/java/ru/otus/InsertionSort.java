@@ -6,14 +6,14 @@ public class InsertionSort {
 
 		for (int i = 0; i < array.length; i++) {
 			int buffer = array[i];
-			int j = i - 1;
+			int p = i - 1;
 
-			while (j >= 0 && array[j] > buffer) {
-				array[j + 1] = array[j];
-				j--;
+			while (p >= 0 && array[p] > buffer) {
+				array[p + 1] = array[p];
+				p--;
 			}
 
-			array[j + 1] = buffer;
+			array[p + 1] = buffer;
 		}
 
 	}
@@ -21,15 +21,15 @@ public class InsertionSort {
 	static void sort(int[] array, int gap) {
 
 		for (int i = 0; i + gap < array.length; i++) {
-			int j = i + gap;
-			int buffer = array[j];
+			int p = i + gap;
+			int buffer = array[p];
 
-			while (j - gap >= 0 && array[j - gap] > buffer) {
-				array[j] = array[j - gap];
-				j -= gap;
+			while (p - gap >= 0 && array[p - gap] > buffer) {
+				array[p] = array[p - gap];
+				p -= gap;
 			}
 
-			array[j] = buffer;
+			array[p] = buffer;
 		}
 
 	}

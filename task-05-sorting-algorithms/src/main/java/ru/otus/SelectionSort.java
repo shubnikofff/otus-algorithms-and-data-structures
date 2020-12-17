@@ -15,10 +15,14 @@ public class SelectionSort {
             }
 
             if (minItemIndex != i) {
-                final int buffer = array[i];
-                array[i] = array[minItemIndex];
-                array[minItemIndex] = buffer;
+                swap(i, minItemIndex, array);
             }
         }
+    }
+
+    private static void swap(int from, int to, int[] array) {
+        final int buffer = array[from];
+        array[from] = array[to];
+        array[to] = buffer;
     }
 }
