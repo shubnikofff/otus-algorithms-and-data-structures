@@ -16,12 +16,12 @@ public class FileGenerator {
 		}
 	}
 
-	private static void generate(int size, String filename) throws IOException {
+	public static void generate(int numbersSize, File file) throws IOException {
 		final Random random = new Random();
 
-		try (final BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(filename))) {
+		try (final BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
 			short next;
-			for (int i = 0; i < size; i++) {
+			for (int i = 0; i < numbersSize; i++) {
 				next = (short) random.nextInt(1 << 16);
 				outputStream.write(new byte[]{(byte) ((next & 0xFF00) >> 8), (byte) (next & 0x00FF)});
 			}
