@@ -16,7 +16,7 @@ class QuickSortTest {
     @TestFactory
     Stream<DynamicTest> sort() {
         return DynamicTest.stream(
-                new TestDataSource("strings"),
+                new TestDataSource("text"),
                 QuickSortTest::generateDisplayName,
                 this::executeTest
         );
