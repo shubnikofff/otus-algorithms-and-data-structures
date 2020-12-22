@@ -1,47 +1,88 @@
 package ru.otus;
 
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class MergeSort {
 
-	public static void sort(int[] array) {
-		sort(0, array.length - 1, array);
-	}
+    private static final int MAX_SIZE_FOR_IN_MEMORY_SORTING = 10_000;
 
-	private static void sort(int left, int right, int[] array) {
-		if (left >= right) {
-			return;
-		}
+    public static void sort(String filename) throws IOException {
+        try (final RandomAccessFile file = new RandomAccessFile(filename, "rw")) {
+            sort(0, file.length() / 2 - 1, file);
+        }
+    }
 
-		final int pivot = (left + right) / 2;
+    private static void sort(long left, long right, RandomAccessFile file) throws IOException {
+        if (left >= right) {
+            return;
+        }
 
-		sort(left, pivot, array);
-		sort(pivot + 1, right, array);
-		merge(left, pivot, right, array);
-	}
+        if (right - left < MAX_SIZE_FOR_IN_MEMORY_SORTING) {
+            sortInMemory(left, right, file);
+            return;
+        }
 
-	private static void merge(int left, int pivot, int right, int[] array) {
-		final int[] result = new int[right - left + 1];
-		int l = left;
-		int r = pivot + 1;
-		int res = 0;
+        final long pivot = (left + right) / 2;
 
-		while (l <= pivot && r <= right) {
-			if (array[l] < array[r]) {
-				result[res++] = array[l++];
-			} else {
-				result[res++] = array[r++];
-			}
-		}
+        sort(left, pivot, file);
+        sort(pivot + 1, right, file);
+        merge(left, pivot, right, file);
+    }
 
-		while (l <= pivot) {
-			result[res++] = array[l++];
-		}
+    private static void sortInMemory(long left, long right, RandomAccessFile file) throws IOException {
+        final short[] array = new short[(int) (right - left) + 1];
+        file.seek(left * 2);
+        for (int i = 0; i < array.length; i++) {
+            array[i] = file.readShort();
+        }
+        QuickSort.sort(array);
+        file.seek(left * 2);
+        for (short value : array) {
+            file.writeShort(value);
+        }
+    }
 
-		while (r <= right) {
-			result[res++] = array[r++];
-		}
+    private static void merge(long left, long pivot, long right, RandomAccessFile file) throws IOException {
+        long l = left;
+        long r = pivot + 1;
+        final String mergeFilename = left + "_" + pivot + "_" + right;
 
-		for (int i = left; i <= right; i++) {
-			array[i] = result[i - left];
-		}
-	}
+        try (final RandomAccessFile mergeFile = new RandomAccessFile(mergeFilename, "rw")) {
+            while (l <= pivot && r <= right) {
+                file.seek(l * 2);
+                final short leftItem = file.readShort();
+                file.seek(r * 2);
+                final short rightItem = file.readShort();
+
+                if (leftItem < rightItem) {
+                    mergeFile.writeShort(leftItem);
+                    l++;
+                } else {
+                    mergeFile.writeShort(rightItem);
+                    r++;
+                }
+            }
+
+            while (l <= pivot) {
+                file.seek(l++ * 2);
+                mergeFile.writeShort(file.readShort());
+            }
+
+            while (r <= right) {
+                file.seek(r++ * 2);
+                mergeFile.writeShort(file.readShort());
+            }
+
+            for (long i = left; i <= right; i++) {
+                file.seek(i * 2);
+                mergeFile.seek((i - left) * 2);
+                file.writeShort(mergeFile.readShort());
+            }
+        }
+
+        Files.deleteIfExists(Path.of(mergeFilename));
+    }
 }
