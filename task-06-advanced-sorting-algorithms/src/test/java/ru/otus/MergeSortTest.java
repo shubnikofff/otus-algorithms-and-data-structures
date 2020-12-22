@@ -17,7 +17,7 @@ class MergeSortTest {
 	@TestFactory
 	Stream<DynamicTest> sort() {
 		return DynamicTest.stream(
-				new TestDataSource("numbers"),
+				new TestDataSource("strings"),
 				MergeSortTest::generateDisplayName,
 				this::executeTest
 		);
