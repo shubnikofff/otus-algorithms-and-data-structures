@@ -1,5 +1,6 @@
 package ru.otus;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.Files;
@@ -9,9 +10,9 @@ public class MergeSort {
 
     private static final int MAX_SIZE_FOR_IN_MEMORY_SORTING = 10_000;
 
-    public static void sort(String filename) throws IOException {
-        try (final RandomAccessFile file = new RandomAccessFile(filename, "rw")) {
-            sort(0, file.length() / 2 - 1, file);
+    public static void sort(File file) throws IOException {
+        try (final RandomAccessFile accessFile = new RandomAccessFile(file, "rw")) {
+            sort(0, accessFile.length() / 2 - 1, accessFile);
         }
     }
 
