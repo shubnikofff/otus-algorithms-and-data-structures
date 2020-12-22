@@ -1,4 +1,4 @@
-package ru.otus;
+package ru.otus.sort;
 
 import java.io.File;
 import java.io.IOException;

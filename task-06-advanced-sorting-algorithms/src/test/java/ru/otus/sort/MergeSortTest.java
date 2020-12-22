@@ -1,4 +1,4 @@
-package ru.otus;
+package ru.otus.sort;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
@@ -25,7 +25,7 @@ class MergeSortTest {
 
 	@AfterEach
 	void tearDown() throws IOException {
-		Files.delete(resultFile.toPath());
+		Files.deleteIfExists(resultFile.toPath());
 	}
 
 	@Test
