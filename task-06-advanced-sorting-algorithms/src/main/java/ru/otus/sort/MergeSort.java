@@ -34,14 +34,14 @@ public class MergeSort {
     }
 
     private static void sortInMemory(long left, long right, RandomAccessFile file) throws IOException {
-        final short[] array = new short[(int) (right - left) + 1];
+        final int[] array = new int[(int) (right - left) + 1];
         file.seek(left * 2);
         for (int i = 0; i < array.length; i++) {
-            array[i] = file.readShort();
+            array[i] = file.readUnsignedShort();
         }
         QuickSort.sort(array);
         file.seek(left * 2);
-        for (short value : array) {
+        for (int value : array) {
             file.writeShort(value);
         }
     }
@@ -54,9 +54,9 @@ public class MergeSort {
         try (final RandomAccessFile mergeFile = new RandomAccessFile(mergeFilename, "rw")) {
             while (l <= pivot && r <= right) {
                 file.seek(l * 2);
-                final short leftItem = file.readShort();
+                final int leftItem = file.readUnsignedShort();
                 file.seek(r * 2);
-                final short rightItem = file.readShort();
+                final int rightItem = file.readUnsignedShort();
 
                 if (leftItem < rightItem) {
                     mergeFile.writeShort(leftItem);
@@ -69,18 +69,18 @@ public class MergeSort {
 
             while (l <= pivot) {
                 file.seek(l++ * 2);
-                mergeFile.writeShort(file.readShort());
+                mergeFile.writeShort(file.readUnsignedShort());
             }
 
             while (r <= right) {
                 file.seek(r++ * 2);
-                mergeFile.writeShort(file.readShort());
+                mergeFile.writeShort(file.readUnsignedShort());
             }
 
             for (long i = left; i <= right; i++) {
                 file.seek(i * 2);
                 mergeFile.seek((i - left) * 2);
-                file.writeShort(mergeFile.readShort());
+                file.writeShort(mergeFile.readUnsignedShort());
             }
         }
 
