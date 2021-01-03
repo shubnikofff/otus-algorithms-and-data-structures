@@ -6,6 +6,7 @@ import org.junit.jupiter.api.TestFactory;
 import ru.otus.test.TestData;
 import ru.otus.test.TestDataSource;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,8 +24,8 @@ class QuickSortTest {
     }
 
     private void executeTest(TestData testData) {
-        final short[] expectedResult = toArray(testData.getOutput().get(0));
-        final short[] array = toArray(testData.getInput().get(1));
+        final int[] expectedResult = toArray(testData.getOutput().get(0));
+        final int[] array = toArray(testData.getInput().get(1));
 
         QuickSort.sort(array);
 
@@ -35,14 +36,9 @@ class QuickSortTest {
         return "with length " + testData.getInput().get(0);
     }
 
-    private static short[] toArray(String string) {
-        final String[] strings = string.split(" ");
-        final short[] shorts = new short[strings.length];
-
-        for (int i = 0; i < strings.length; i++) {
-            shorts[i] = Short.parseShort(strings[i]);
-        }
-
-        return shorts;
+    private static int[] toArray(String string) {
+        return Arrays.stream(string.split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
 }

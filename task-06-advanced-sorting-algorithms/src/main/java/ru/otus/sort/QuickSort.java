@@ -2,11 +2,11 @@ package ru.otus.sort;
 
 public class QuickSort {
 
-    public static void sort(short[] array) {
+    public static void sort(int[] array) {
         sort(0, array.length - 1, array);
     }
 
-    private static void sort(int left, int right, short[] array) {
+    private static void sort(int left, int right, int[] array) {
         if (left >= right) {
             return;
         }
@@ -16,7 +16,7 @@ public class QuickSort {
         sort(center + 1, right, array);
     }
 
-    private static int partition(int left, int right, short[] array) {
+    private static int partition(int left, int right, int[] array) {
         final int pivot = array[right];
         int a = left - 1;
 
@@ -29,8 +29,8 @@ public class QuickSort {
         return a;
     }
 
-    private static void swap(int from, int to, short[] array) {
-        final short buffer = array[from];
+    private static void swap(int from, int to, int[] array) {
+        final int buffer = array[from];
         array[from] = array[to];
         array[to] = buffer;
     }
