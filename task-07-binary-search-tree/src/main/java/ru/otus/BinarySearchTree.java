@@ -28,10 +28,6 @@ public class BinarySearchTree {
 		return node;
 	}
 
-	private void insertRight(Node parent, Node child) {
-
-	}
-
 	public void remove(int value) {
 
 	}
@@ -40,4 +36,7 @@ public class BinarySearchTree {
 		return true;
 	}
 
+	public Node getRoot() {
+		return root;
+	}
 }
