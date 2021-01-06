@@ -1,37 +1,49 @@
 package ru.otus;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.otus.factory.RegistrableNodeFactory;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BinarySearchTreeTest {
 
-    @Test
-    void insert() {
-        final BinarySearchTree tree = new BinarySearchTree();
-        tree.insert(10);
-        tree.insert(5);
-        tree.insert(8);
-        tree.insert(4);
-        tree.insert(13);
+	private RegistrableNodeFactory nodeFactory;
 
-		final Node root = tree.getRoot();
-        assertEquals(root.getValue(), 10);
-        assertEquals(13, root.getRight().getValue());
-        assertEquals(5, root.getLeft().getValue());
-        assertEquals(4, root.getLeft().getLeft().getValue());
-        assertEquals(8, root.getLeft().getRight().getValue());
+	private Map<Integer, Node> nodeRegistry;
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            tree.insert(8);
-        });
-    }
+	@BeforeEach
+	void setUp() {
+		nodeRegistry = new HashMap<>();
+		nodeFactory = new RegistrableNodeFactory(nodeRegistry);
+	}
 
-    @Test
-    void remove() {
-    }
+	@Test
+	void insert() {
+		final BinarySearchTree tree = new BinarySearchTree(nodeFactory);
+		tree.insert(10);
+		tree.insert(5);
+		tree.insert(8);
+		tree.insert(4);
+		tree.insert(13);
 
-    @Test
-    void search() {
-    }
+		assertEquals(10, nodeRegistry.get(10).getValue());
+		assertEquals(13, nodeRegistry.get(10).getRight().getValue());
+		assertEquals(5, nodeRegistry.get(10).getLeft().getValue());
+		assertEquals(4, nodeRegistry.get(5).getLeft().getValue());
+		assertEquals(8, nodeRegistry.get(5).getRight().getValue());
+
+		assertThrows(IllegalArgumentException.class, () -> tree.insert(8));
+	}
+
+	@Test
+	void remove() {
+	}
+
+	@Test
+	void search() {
+	}
 }

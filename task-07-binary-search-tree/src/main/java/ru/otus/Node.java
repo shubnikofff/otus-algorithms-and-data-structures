@@ -1,6 +1,6 @@
 package ru.otus;
 
-class Node {
+public class Node {
 
 	private Node left;
 
