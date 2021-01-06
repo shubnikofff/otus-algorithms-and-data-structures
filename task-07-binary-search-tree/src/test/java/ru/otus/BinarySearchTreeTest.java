@@ -11,31 +11,30 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BinarySearchTreeTest {
 
-	private RegistrableNodeFactory nodeFactory;
-
 	private Map<Integer, Node> nodeRegistry;
+
+	private BinarySearchTree tree;
 
 	@BeforeEach
 	void setUp() {
 		nodeRegistry = new HashMap<>();
-		nodeFactory = new RegistrableNodeFactory(nodeRegistry);
-	}
+		final RegistrableNodeFactory nodeFactory = new RegistrableNodeFactory(nodeRegistry);
+		tree = new BinarySearchTree(nodeFactory);
 
-	@Test
-	void insert() {
-		final BinarySearchTree tree = new BinarySearchTree(nodeFactory);
 		tree.insert(10);
 		tree.insert(5);
 		tree.insert(8);
 		tree.insert(4);
 		tree.insert(13);
+	}
 
+	@Test
+	void insert() {
 		assertEquals(10, nodeRegistry.get(10).getValue());
 		assertEquals(13, nodeRegistry.get(10).getRight().getValue());
 		assertEquals(5, nodeRegistry.get(10).getLeft().getValue());
 		assertEquals(4, nodeRegistry.get(5).getLeft().getValue());
 		assertEquals(8, nodeRegistry.get(5).getRight().getValue());
-
 		assertThrows(IllegalArgumentException.class, () -> tree.insert(8));
 	}
 
@@ -45,5 +44,7 @@ class BinarySearchTreeTest {
 
 	@Test
 	void search() {
+		assertTrue(tree.search(4));
+		assertFalse(tree.search(100));
 	}
 }

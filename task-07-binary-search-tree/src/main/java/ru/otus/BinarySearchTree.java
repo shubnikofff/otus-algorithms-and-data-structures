@@ -41,6 +41,18 @@ public class BinarySearchTree {
 	}
 
 	public boolean search(int value) {
-		return true;
+		return search(root, value);
+	}
+
+	private boolean search(Node node, int value) {
+		if (node == null) {
+			return false;
+		}
+
+		if (value == node.getValue()) {
+			return true;
+		}
+
+		return value < node.getValue() ? search(node.getLeft(), value) : search(node.getRight(), value);
 	}
 }
