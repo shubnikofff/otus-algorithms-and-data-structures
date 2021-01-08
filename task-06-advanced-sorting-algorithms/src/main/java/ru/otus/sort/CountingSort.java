@@ -6,9 +6,11 @@ import java.io.RandomAccessFile;
 
 public class CountingSort {
 
-	private static final long[] sums = new long[(int) Math.pow(2, 16)];
+	public static final double NUMBER_OF_TWO_BYTE_NUMBERS = Math.pow(2, 16);
 
 	public static void sort(File inputFile, File outputFile) throws IOException {
+		final long[] sums = new long[(int) NUMBER_OF_TWO_BYTE_NUMBERS];
+
 		try (final RandomAccessFile accessInputFile = new RandomAccessFile(inputFile, "r")) {
 			while (accessInputFile.getFilePointer() < inputFile.length()) {
 				sums[accessInputFile.readUnsignedShort()] += 1;
