@@ -1,9 +1,9 @@
 package ru.otus.sort;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,24 +14,24 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class MergeSortTest {
 
-	private final File initialFile = new File("src/test/resources/binary/initial");
-	private final File resultFile = new File("src/test/resources/binary/result");
-	private final File expectedFile = new File("src/test/resources/binary/expected");
+    private static final File INITIAL_FILE = new File("src/test/resources/binary/initial");
+    private static final File EXPECTED_FILE = new File("src/test/resources/binary/expected");
 
-	@BeforeEach
-	void setUp() throws IOException {
-		Files.copy(initialFile.toPath(), resultFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-	}
+    @TempDir
+    File tmpDir;
 
-	@AfterEach
-	void tearDown() throws IOException {
-		Files.deleteIfExists(resultFile.toPath());
-	}
+    private File resultFile;
 
-	@Test
-	void sort() throws IOException {
-		MergeSort.sort(resultFile);
+    @BeforeEach
+    void setUp() throws IOException {
+        resultFile = new File(tmpDir, "result");
+        Files.copy(INITIAL_FILE.toPath(), resultFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    }
 
-		assertArrayEquals(FileUtils.readFileToByteArray(resultFile), FileUtils.readFileToByteArray(expectedFile));
-	}
+    @Test
+    void sort() throws IOException {
+        MergeSort.sort(resultFile);
+
+        assertArrayEquals(FileUtils.readFileToByteArray(resultFile), FileUtils.readFileToByteArray(EXPECTED_FILE));
+    }
 }
