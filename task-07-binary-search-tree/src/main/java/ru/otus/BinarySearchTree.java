@@ -6,95 +6,91 @@ import static java.lang.String.format;
 
 public class BinarySearchTree {
 
-    private Node root;
+	private Node root;
 
-    private final NodeFactory nodeFactory;
+	private final NodeFactory nodeFactory;
 
-    public BinarySearchTree(NodeFactory nodeFactory) {
-        this.nodeFactory = nodeFactory;
-    }
+	public BinarySearchTree(NodeFactory nodeFactory) {
+		this.nodeFactory = nodeFactory;
+	}
 
-    public void insert(int value) {
-        root = insert(root, value);
-    }
+	public void insert(int value) {
+		root = insert(root, value);
+	}
 
-    private Node insert(Node node, int value) {
-        if (node == null) {
-            return nodeFactory.createNode(value);
-        }
+	private Node insert(Node node, int value) {
+		if (node == null) {
+			return nodeFactory.createNode(value);
+		}
 
-        if (value == node.getValue()) {
-            throw new IllegalArgumentException(format("Node with value %d already exists", value));
-        }
+		if (value == node.value) {
+			throw new IllegalArgumentException(format("Node with value %d already exists", value));
+		}
 
-        if (value < node.getValue()) {
-            final Node left = insert(node.getLeft(), value);
-            node.setLeft(left);
-        } else {
-            final Node right = insert(node.getRight(), value);
-            node.setRight(right);
-        }
+		if (value < node.value) {
+			node.left = insert(node.left, value);
+		} else {
+			node.right = insert(node.right, value);
+		}
 
-        return node;
-    }
+		return node;
+	}
 
-    public void remove(int value) {
-        root = remove(root, value);
-    }
+	public void remove(int value) {
+		root = remove(root, value);
+	}
 
-    private Node remove(Node node, int value) {
-        if (node == null) {
-            return null;
-        }
+	private Node remove(Node node, int value) {
+		if (node == null) {
+			return null;
+		}
 
-        if (value == node.getValue()) {
-            if (node.getLeft() == null && node.getRight() == null) {
-                return null;
-            }
+		if (value == node.value) {
+			if (node.left == null && node.right == null) {
+				return null;
+			}
 
-            if (node.getLeft() == null) {
-                return node.getRight();
-            }
+			if (node.left == null) {
+				return node.right;
+			}
 
-            if (node.getRight() == null) {
-                return node.getLeft();
-            }
+			if (node.right == null) {
+				return node.left;
+			}
 
-            final int smallestValue = findSmallestValue(node.getRight());
-            node.setValue(smallestValue);
-            final Node right = remove(node.getRight(), smallestValue);
-            node.setRight(right);
-            return node;
-        }
+			final int smallestValue = findSmallestValue(node.right);
+			node.value = smallestValue;
+			node.right = remove(node.right, smallestValue);
 
-        if (value < node.getValue()) {
-            final Node left = remove(node.getLeft(), value);
-            node.setLeft(left);
-        } else {
-            final Node right = remove(node.getRight(), value);
-            node.setRight(right);
-        }
+			return node;
+		}
 
-        return node;
-    }
+		if (value < node.value) {
+			node.left = remove(node.left, value);
+		} else {
+			node.right = remove(node.right, value);
+		}
 
-    private int findSmallestValue(Node node) {
-        return node.getLeft() == null ? node.getValue() : findSmallestValue(node.getLeft());
-    }
+		return node;
+	}
 
-    public boolean search(int value) {
-        return search(root, value);
-    }
+	private int findSmallestValue(Node node) {
+		return node.left == null ? node.value : findSmallestValue(node.left);
+	}
 
-    private boolean search(Node node, int value) {
-        if (node == null) {
-            return false;
-        }
+	public boolean search(int value) {
+		return search(root, value);
+	}
 
-        if (value == node.getValue()) {
-            return true;
-        }
+	private boolean search(Node node, int value) {
+		if (node == null) {
+			return false;
+		}
 
-        return value < node.getValue() ? search(node.getLeft(), value) : search(node.getRight(), value);
-    }
+		if (value == node.value) {
+			return true;
+		}
+
+		return value < node.value ? search(node.left, value) : search(node.right, value);
+	}
 }

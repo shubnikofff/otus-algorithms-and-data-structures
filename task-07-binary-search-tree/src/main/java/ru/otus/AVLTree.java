@@ -4,19 +4,21 @@ import ru.otus.factory.NodeFactory;
 
 public class AVLTree extends BinarySearchTree {
 
-    public AVLTree(NodeFactory nodeFactory) {
-        super(nodeFactory);
-    }
+	public AVLTree(NodeFactory nodeFactory) {
+		super(nodeFactory);
+	}
 
-    private int getHeight(Node node) {
-        return node == null ? 0 : node.getHeight();
-    }
+	private int getHeight(Node node) {
+		return node == null ? 0 : node.height;
+	}
 
-    private int getBalance(Node node) {
-        return getHeight(node.getLeft()) - getHeight(node.getRight());
-    }
+	private int getBalance(Node node) {
+		return node == null ? 0 : getHeight(node.left) - getHeight(node.right);
+	}
 
-    private int recalculateHeight(Node node) {
-        return Math.max(getHeight(node.getLeft()), getHeight(node.getRight())) + 1;
-    }
+	private void recalculateHeight(Node node) {
+		if (node != null) {
+			node.height = Math.max(getHeight(node.left), getHeight(node.right)) + 1;
+		}
+	}
 }
