@@ -8,6 +8,43 @@ public class AVLTree extends BinarySearchTree {
 		super(nodeFactory);
 	}
 
+	private Node smallLeftRotation(Node y) {
+		final Node x = y.right;
+		final Node z = x.left;
+
+		x.left = y;
+		y.right = z;
+
+		recalculateHeight(y);
+		recalculateHeight(x);
+
+		return x;
+
+	}
+
+	private Node smallRightRotation(Node y) {
+		final Node x = y.left;
+		final Node z = x.right;
+
+		x.right = y;
+		y.left = z;
+
+		recalculateHeight(y);
+		recalculateHeight(x);
+
+		return x;
+	}
+
+	private Node bigLeftRotation(Node node) {
+		node.right = smallRightRotation(node.right);
+		return smallLeftRotation(node);
+	}
+
+	private Node bigRightRotation(Node node) {
+		node.left = smallLeftRotation(node.left);
+		return smallRightRotation(node);
+	}
+
 	private int getHeight(Node node) {
 		return node == null ? 0 : node.height;
 	}
