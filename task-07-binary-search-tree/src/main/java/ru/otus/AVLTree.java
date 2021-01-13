@@ -8,6 +8,16 @@ public class AVLTree extends BinarySearchTree {
         super(nodeFactory);
     }
 
+    @Override
+    protected Node insert(Node node, int value) {
+        return balance(super.insert(node, value));
+    }
+
+    @Override
+    protected Node remove(Node node, int value) {
+        return balance(super.remove(node, value));
+    }
+
     private Node smallLeftRotation(Node y) {
         final Node x = y.right;
         final Node z = x.left;

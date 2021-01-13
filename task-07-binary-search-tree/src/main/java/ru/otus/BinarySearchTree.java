@@ -18,7 +18,7 @@ public class BinarySearchTree {
 		root = insert(root, value);
 	}
 
-	private Node insert(Node node, int value) {
+	protected Node insert(Node node, int value) {
 		if (node == null) {
 			return nodeFactory.createNode(value);
 		}
@@ -40,7 +40,7 @@ public class BinarySearchTree {
 		root = remove(root, value);
 	}
 
-	private Node remove(Node node, int value) {
+	protected Node remove(Node node, int value) {
 		if (node == null) {
 			return null;
 		}
