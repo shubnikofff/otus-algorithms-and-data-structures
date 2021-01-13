@@ -4,58 +4,70 @@ import ru.otus.factory.NodeFactory;
 
 public class AVLTree extends BinarySearchTree {
 
-	public AVLTree(NodeFactory nodeFactory) {
-		super(nodeFactory);
-	}
+    public AVLTree(NodeFactory nodeFactory) {
+        super(nodeFactory);
+    }
 
-	private Node smallLeftRotation(Node y) {
-		final Node x = y.right;
-		final Node z = x.left;
+    private Node smallLeftRotation(Node y) {
+        final Node x = y.right;
+        final Node z = x.left;
 
-		x.left = y;
-		y.right = z;
+        x.left = y;
+        y.right = z;
 
-		recalculateHeight(y);
-		recalculateHeight(x);
+        recalculateHeight(y);
+        recalculateHeight(x);
 
-		return x;
+        return x;
+    }
 
-	}
+    private Node balance(Node node) {
+        recalculateHeight(node);
+        final int balance = getBalance(node);
 
-	private Node smallRightRotation(Node y) {
-		final Node x = y.left;
-		final Node z = x.right;
+        if (balance > 1) {
+            node = getHeight(node.right.left) < getHeight(node.right.right) ? smallLeftRotation(node) : bigLeftRotation(node);
+        } else if (balance < -1) {
+            node = getHeight(node.left.right) < getHeight(node.left.left) ? smallRightRotation(node) : bigRightRotation(node);
+        }
 
-		x.right = y;
-		y.left = z;
+        return node;
+    }
 
-		recalculateHeight(y);
-		recalculateHeight(x);
+    private Node smallRightRotation(Node y) {
+        final Node x = y.left;
+        final Node z = x.right;
 
-		return x;
-	}
+        x.right = y;
+        y.left = z;
 
-	private Node bigLeftRotation(Node node) {
-		node.right = smallRightRotation(node.right);
-		return smallLeftRotation(node);
-	}
+        recalculateHeight(y);
+        recalculateHeight(x);
 
-	private Node bigRightRotation(Node node) {
-		node.left = smallLeftRotation(node.left);
-		return smallRightRotation(node);
-	}
+        return x;
+    }
 
-	private int getHeight(Node node) {
-		return node == null ? 0 : node.height;
-	}
+    private Node bigLeftRotation(Node node) {
+        node.right = smallRightRotation(node.right);
+        return smallLeftRotation(node);
+    }
 
-	private int getBalance(Node node) {
-		return node == null ? 0 : getHeight(node.left) - getHeight(node.right);
-	}
+    private Node bigRightRotation(Node node) {
+        node.left = smallLeftRotation(node.left);
+        return smallRightRotation(node);
+    }
 
-	private void recalculateHeight(Node node) {
-		if (node != null) {
-			node.height = Math.max(getHeight(node.left), getHeight(node.right)) + 1;
-		}
-	}
+    private int getHeight(Node node) {
+        return node == null ? 0 : node.height;
+    }
+
+    private int getBalance(Node node) {
+        return node == null ? 0 : getHeight(node.right) - getHeight(node.left);
+    }
+
+    private void recalculateHeight(Node node) {
+        if (node != null) {
+            node.height = Math.max(getHeight(node.left), getHeight(node.right)) + 1;
+        }
+    }
 }
