@@ -25,7 +25,7 @@ class AVLTreeTest {
 
     @Test
     @DisplayName("Insert with small right rotation")
-    void inser_with_small_right_rotation() {
+    void insert_with_small_right_rotation() {
         tree.insert(10);
         tree.insert(9);
         tree.insert(8);
@@ -39,7 +39,7 @@ class AVLTreeTest {
 
     @Test
     @DisplayName("Insert with small left rotation")
-    void inser_with_small_left_rotation() {
+    void insert_with_small_left_rotation() {
         tree.insert(1);
         tree.insert(2);
         tree.insert(3);
