@@ -6,9 +6,9 @@ import static java.lang.String.format;
 
 public class BinarySearchTree {
 
-	private Node root;
+	protected Node root;
 
-	private final NodeFactory nodeFactory;
+	protected final NodeFactory nodeFactory;
 
 	public BinarySearchTree(NodeFactory nodeFactory) {
 		this.nodeFactory = nodeFactory;
