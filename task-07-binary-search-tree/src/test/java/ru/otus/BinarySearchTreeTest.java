@@ -36,7 +36,7 @@ class BinarySearchTreeTest {
     void insert_left() {
         assertNull(nodeRegistry.get(4).left);
         tree.insert(2);
-        assertEquals(2, nodeRegistry.get(4).left.value);
+        assertEquals(2, nodeRegistry.get(4).left.key);
     }
 
     @Test
@@ -44,7 +44,7 @@ class BinarySearchTreeTest {
     void insert_right() {
         assertNull(nodeRegistry.get(8).right);
         tree.insert(9);
-        assertEquals(9, nodeRegistry.get(8).right.value);
+        assertEquals(9, nodeRegistry.get(8).right.key);
     }
 
     @Test
@@ -56,7 +56,7 @@ class BinarySearchTreeTest {
     @Test
     @DisplayName("Remove when no children")
     void remove_when_no_children() {
-        assertEquals(6, nodeRegistry.get(8).left.value);
+        assertEquals(6, nodeRegistry.get(8).left.key);
         tree.remove(6);
         assertNull(nodeRegistry.get(8).left);
     }
@@ -64,17 +64,17 @@ class BinarySearchTreeTest {
     @Test
     @DisplayName("Remove when one child")
     void remove_when_one_child() {
-        assertEquals(8, nodeRegistry.get(5).right.value);
+        assertEquals(8, nodeRegistry.get(5).right.key);
         tree.remove(8);
-        assertEquals(6, nodeRegistry.get(5).right.value);
+        assertEquals(6, nodeRegistry.get(5).right.key);
     }
 
     @Test
     @DisplayName("Remove when two children")
     void remove_when_two_children() {
-        assertEquals(5, nodeRegistry.get(10).left.value);
+        assertEquals(5, nodeRegistry.get(10).left.key);
         tree.remove(5);
-        assertEquals(6, nodeRegistry.get(10).left.value);
+        assertEquals(6, nodeRegistry.get(10).left.key);
         assertNull(nodeRegistry.get(8).left);
     }
 

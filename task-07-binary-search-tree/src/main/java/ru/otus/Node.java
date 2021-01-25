@@ -6,12 +6,12 @@ public class Node {
 
 	Node right;
 
-	int value;
+	int key;
 
 	int height;
 
-	public Node(int value) {
-		this.value = value;
+	public Node(int key) {
+		this.key = key;
 		height = 0;
 	}
 }

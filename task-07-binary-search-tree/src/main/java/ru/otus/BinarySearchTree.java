@@ -23,11 +23,11 @@ public class BinarySearchTree {
 			return nodeFactory.createNode(value);
 		}
 
-		if (value == node.value) {
+		if (value == node.key) {
 			throw new IllegalArgumentException(format("Node with value %d already exists", value));
 		}
 
-		if (value < node.value) {
+		if (value < node.key) {
 			node.left = insert(node.left, value);
 		} else {
 			node.right = insert(node.right, value);
@@ -45,7 +45,7 @@ public class BinarySearchTree {
 			return null;
 		}
 
-		if (value == node.value) {
+		if (value == node.key) {
 			if (node.left == null && node.right == null) {
 				return null;
 			}
@@ -59,13 +59,13 @@ public class BinarySearchTree {
 			}
 
 			final int smallestValue = findSmallestValue(node.right);
-			node.value = smallestValue;
+			node.key = smallestValue;
 			node.right = remove(node.right, smallestValue);
 
 			return node;
 		}
 
-		if (value < node.value) {
+		if (value < node.key) {
 			node.left = remove(node.left, value);
 		} else {
 			node.right = remove(node.right, value);
@@ -75,7 +75,7 @@ public class BinarySearchTree {
 	}
 
 	private int findSmallestValue(Node node) {
-		return node.left == null ? node.value : findSmallestValue(node.left);
+		return node.left == null ? node.key : findSmallestValue(node.left);
 	}
 
 	public boolean search(int value) {
@@ -87,10 +87,10 @@ public class BinarySearchTree {
 			return false;
 		}
 
-		if (value == node.value) {
+		if (value == node.key) {
 			return true;
 		}
 
-		return value < node.value ? search(node.left, value) : search(node.right, value);
+		return value < node.key ? search(node.left, value) : search(node.right, value);
 	}
 }

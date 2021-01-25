@@ -40,7 +40,7 @@ public class Treap extends BinarySearchTree {
 			return result;
 		}
 
-		if(node.value <= key) {
+		if(node.key <= key) {
 			result.left = node;
 			final SplitResult rightSplit = split((TreapNode) node.right, key);
 			result.left.right = rightSplit.left;
