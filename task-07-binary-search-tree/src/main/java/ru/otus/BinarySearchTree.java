@@ -6,7 +6,7 @@ import static java.lang.String.format;
 
 public class BinarySearchTree {
 
-	protected Node root;
+	private Node root;
 
 	protected final NodeFactory nodeFactory;
 

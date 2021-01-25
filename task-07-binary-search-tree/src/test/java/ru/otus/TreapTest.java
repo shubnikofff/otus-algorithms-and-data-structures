@@ -1,6 +1,7 @@
 package ru.otus;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.otus.factory.RegistrableNodeFactory;
 
@@ -20,10 +21,6 @@ class TreapTest {
 		nodeRegistry = new HashMap<>();
 		final RegistrableNodeFactory nodeFactory = new RegistrableNodeFactory(nodeRegistry);
 		tree = new Treap(nodeFactory);
-	}
-
-	@Test
-	void insert() {
 		tree.insert(10);
 		tree.insert(9);
 		tree.insert(8);
@@ -31,6 +28,20 @@ class TreapTest {
 	}
 
 	@Test
+	void insert() {
+	}
+
+	@Test
 	void remove() {
+		tree.remove(9);
+		assertFalse(tree.search(9));
+	}
+
+	@Test
+	@DisplayName("Search")
+	void search() {
+		assertFalse(tree.search(100));
+		tree.insert(100);
+		assertTrue(tree.search(100));
 	}
 }

@@ -56,16 +56,16 @@ public class Treap extends BinarySearchTree {
 	}
 
 	@Override
-	public void insert(int value) {
-		final SplitResult splitResult = split((TreapNode) root, value);
-		root = merge(merge(splitResult.leftNode, nodeFactory.createTreapNode(value, random.nextInt(MAX_PRIORITY))), splitResult.rightNode);
+	protected Node insert(Node node, int value) {
+		final SplitResult splitResult = split((TreapNode) node, value);
+		return merge(merge(splitResult.leftNode, nodeFactory.createTreapNode(value, random.nextInt(MAX_PRIORITY))), splitResult.rightNode);
 	}
 
 	@Override
-	public void remove(int value) {
-		final SplitResult leftSplit = split((TreapNode) root, value - 1);
+	protected Node remove(Node node, int value) {
+		final SplitResult leftSplit = split((TreapNode) node, value - 1);
 		final SplitResult rightSplit = split(leftSplit.rightNode, value);
-		root = merge(leftSplit.leftNode, rightSplit.rightNode);
+		return merge(leftSplit.leftNode, rightSplit.rightNode);
 	}
 
 	private static class SplitResult {
