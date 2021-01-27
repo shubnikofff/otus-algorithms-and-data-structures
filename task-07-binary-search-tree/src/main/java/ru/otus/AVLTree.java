@@ -1,21 +1,15 @@
 package ru.otus;
 
-import ru.otus.factory.NodeFactory;
-
 public class AVLTree extends BinarySearchTree {
-
-    public AVLTree(NodeFactory nodeFactory) {
-        super(nodeFactory);
-    }
 
     @Override
     protected Node insert(Node node, int value) {
-        return balance(super.insert(node, value));
+        return rebalance(super.insert(node, value));
     }
 
     @Override
     protected Node remove(Node node, int value) {
-        return balance(super.remove(node, value));
+        return rebalance(super.remove(node, value));
     }
 
     private Node smallLeftRotation(Node y) {
@@ -31,7 +25,7 @@ public class AVLTree extends BinarySearchTree {
         return x;
     }
 
-    private Node balance(Node node) {
+    private Node rebalance(Node node) {
         recalculateHeight(node);
         final int balance = getBalance(node);
 

@@ -1,18 +1,10 @@
 package ru.otus;
 
-import ru.otus.factory.NodeFactory;
-
 import static java.lang.String.format;
 
 public class BinarySearchTree {
 
-	private Node root;
-
-	protected final NodeFactory nodeFactory;
-
-	public BinarySearchTree(NodeFactory nodeFactory) {
-		this.nodeFactory = nodeFactory;
-	}
+	Node root;
 
 	public void insert(int value) {
 		root = insert(root, value);
@@ -20,7 +12,7 @@ public class BinarySearchTree {
 
 	protected Node insert(Node node, int value) {
 		if (node == null) {
-			return nodeFactory.createNode(value);
+			return new Node(value);
 		}
 
 		if (value == node.key) {
@@ -82,15 +74,15 @@ public class BinarySearchTree {
 		return search(root, value);
 	}
 
-	private boolean search(Node node, int value) {
+	private boolean search(Node node, int key) {
 		if (node == null) {
 			return false;
 		}
 
-		if (value == node.key) {
+		if (key == node.key) {
 			return true;
 		}
 
-		return value < node.key ? search(node.left, value) : search(node.right, value);
+		return key < node.key ? search(node.left, key) : search(node.right, key);
 	}
 }
