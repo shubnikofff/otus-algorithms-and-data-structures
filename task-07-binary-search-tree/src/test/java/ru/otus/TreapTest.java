@@ -3,24 +3,18 @@ package ru.otus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.otus.factory.RegistrableNodeFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static ru.otus.TestHelper.walkTree;
 
 class TreapTest {
-
-	private Map<Integer, Node> nodeRegistry;
 
 	private Treap tree;
 
 	@BeforeEach
 	void setUp() {
-		nodeRegistry = new HashMap<>();
-		final RegistrableNodeFactory nodeFactory = new RegistrableNodeFactory(nodeRegistry);
-		tree = new Treap(nodeFactory);
+		tree = new Treap();
 		tree.insert(10);
 		tree.insert(9);
 		tree.insert(8);
@@ -29,6 +23,8 @@ class TreapTest {
 
 	@Test
 	void insert() {
+		walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+		walkTree(tree.root, TestHelper::checkIfPriorityGraterThanChildrenPriority);
 	}
 
 	@Test

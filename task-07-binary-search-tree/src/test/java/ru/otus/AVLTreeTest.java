@@ -3,51 +3,82 @@ package ru.otus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.otus.factory.RegistrableNodeFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static ru.otus.TestHelper.walkTree;
 
 class AVLTreeTest {
-
-    private Map<Integer, Node> nodeRegistry;
 
     private AVLTree tree;
 
     @BeforeEach
     void setUp() {
-        nodeRegistry = new HashMap<>();
-        final RegistrableNodeFactory nodeFactory = new RegistrableNodeFactory(nodeRegistry);
-        tree = new AVLTree(nodeFactory);
+        tree = new AVLTree();
     }
 
     @Test
-    @DisplayName("Insert with small right rotation")
-    void insert_with_small_right_rotation() {
+    @DisplayName("Small right rotation")
+    void smallRightRotation() {
         tree.insert(10);
+        tree.insert(11);
         tree.insert(9);
         tree.insert(8);
+        tree.insert(7);
 
-        assertEquals(2, nodeRegistry.get(9).height);
-        assertEquals(nodeRegistry.get(8), nodeRegistry.get(9).left);
-        assertEquals(nodeRegistry.get(10), nodeRegistry.get(9).right);
-        assertEquals(1, nodeRegistry.get(9).left.height);
-        assertEquals(1, nodeRegistry.get(9).right.height);
+        walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+        walkTree(tree.root, TestHelper::checkBalance);
     }
 
     @Test
-    @DisplayName("Insert with small left rotation")
-    void insert_with_small_left_rotation() {
-        tree.insert(1);
-        tree.insert(2);
-        tree.insert(3);
+    @DisplayName("Small left rotation")
+    void smallLeftRotation() {
+        tree.insert(10);
+        tree.insert(9);
+        tree.insert(11);
+        tree.insert(12);
+        tree.insert(13);
 
-        assertEquals(2, nodeRegistry.get(2).height);
-        assertEquals(nodeRegistry.get(1), nodeRegistry.get(2).left);
-        assertEquals(nodeRegistry.get(3), nodeRegistry.get(2).right);
-        assertEquals(1, nodeRegistry.get(2).left.height);
-        assertEquals(1, nodeRegistry.get(2).right.height);
+        walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+        walkTree(tree.root, TestHelper::checkBalance);
+    }
+
+    @Test
+    @DisplayName("Big right rotation")
+    void bigRightRotation() {
+        tree.insert(10);
+        tree.insert(11);
+        tree.insert(8);
+        tree.insert(7);
+        tree.insert(6);
+        tree.insert(9);
+
+        walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+        walkTree(tree.root, TestHelper::checkBalance);
+    }
+
+    @Test
+    @DisplayName("Big left rotation")
+    void bigLeftRotation() {
+        tree.insert(10);
+        tree.insert(9);
+        tree.insert(12);
+        tree.insert(13);
+        tree.insert(14);
+        tree.insert(11);
+
+        walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+        walkTree(tree.root, TestHelper::checkBalance);
+    }
+
+    @Test
+    @DisplayName("Search")
+    void search() {
+        tree.insert(4);
+        tree.insert(5);
+        tree.insert(6);
+        tree.insert(7);
+        assertTrue(tree.search(5));
+        assertFalse(tree.search(100));
     }
 }
