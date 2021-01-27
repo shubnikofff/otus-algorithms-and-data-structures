@@ -10,6 +10,8 @@ public class Node {
 
 	int height;
 
+	int priority;
+
 	public Node(int key) {
 		this.key = key;
 		height = 0;

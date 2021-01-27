@@ -1,21 +1,12 @@
 package ru.otus;
 
-import ru.otus.factory.NodeFactory;
-
 import java.util.Random;
 
 public class Treap extends BinarySearchTree {
 
-	public static final int MAX_PRIORITY = 10_000;
+	private final Random random = new Random();
 
-	private final Random random;
-
-	public Treap(NodeFactory nodeFactory) {
-		super(nodeFactory);
-		random = new Random();
-	}
-
-	private TreapNode merge(TreapNode leftNode, TreapNode rightNode) {
+	private Node merge(Node leftNode, Node rightNode) {
 		if (leftNode == null) {
 			return rightNode;
 		}
@@ -25,15 +16,15 @@ public class Treap extends BinarySearchTree {
 		}
 
 		if(leftNode.priority > rightNode.priority) {
-			leftNode.right = merge((TreapNode) leftNode.right, rightNode);
+			leftNode.right = merge(leftNode.right, rightNode);
 			return leftNode;
 		} else {
-			rightNode.left = merge(leftNode, (TreapNode) rightNode.left);
+			rightNode.left = merge(leftNode, rightNode.left);
 			return rightNode;
 		}
 	}
 
-	private SplitResult split(TreapNode node, int key) {
+	private SplitResult split(Node node, int key) {
 		final SplitResult result = new SplitResult();
 
 		if (node == null) {
@@ -42,12 +33,12 @@ public class Treap extends BinarySearchTree {
 
 		if(node.key <= key) {
 			result.leftNode = node;
-			final SplitResult rightSplit = split((TreapNode) node.right, key);
+			final SplitResult rightSplit = split(node.right, key);
 			result.leftNode.right = rightSplit.leftNode;
 			result.rightNode = rightSplit.rightNode;
 		} else {
 			result.rightNode = node;
-			final SplitResult leftSplit = split((TreapNode) node.left, key);
+			final SplitResult leftSplit = split(node.left, key);
 			result.rightNode.left = leftSplit.rightNode;
 			result.leftNode = leftSplit.leftNode;
 		}
@@ -57,22 +48,24 @@ public class Treap extends BinarySearchTree {
 
 	@Override
 	protected Node insert(Node node, int value) {
-		final SplitResult splitResult = split((TreapNode) node, value);
-		return merge(merge(splitResult.leftNode, nodeFactory.createTreapNode(value, random.nextInt(MAX_PRIORITY))), splitResult.rightNode);
+		Node newNode = new Node(value);
+		newNode.priority = random.nextInt();
+		final SplitResult splitResult = split(node, value);
+		return merge(merge(splitResult.leftNode, newNode), splitResult.rightNode);
 	}
 
 	@Override
 	protected Node remove(Node node, int value) {
-		final SplitResult leftSplit = split((TreapNode) node, value - 1);
+		final SplitResult leftSplit = split(node, value - 1);
 		final SplitResult rightSplit = split(leftSplit.rightNode, value);
 		return merge(leftSplit.leftNode, rightSplit.rightNode);
 	}
 
 	private static class SplitResult {
 
-		private TreapNode leftNode;
+		private Node leftNode;
 
-		private TreapNode rightNode;
+		private Node rightNode;
 	}
 
 }
