@@ -3,13 +3,13 @@ package ru.otus.bst;
 public class AVLTree extends BinarySearchTree {
 
     @Override
-    protected Node insert(Node node, int value) {
-        return rebalance(super.insert(node, value));
+    protected Node insert(Node node, int key) {
+        return rebalance(super.insert(node, key));
     }
 
     @Override
-    protected Node remove(Node node, int value) {
-        return rebalance(super.remove(node, value));
+    protected Node remove(Node node, int key) {
+        return rebalance(super.remove(node, key));
     }
 
     private Node smallLeftRotation(Node y) {
