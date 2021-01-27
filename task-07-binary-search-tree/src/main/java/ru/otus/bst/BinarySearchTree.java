@@ -1,7 +1,5 @@
 package ru.otus.bst;
 
-import static java.lang.String.format;
-
 public class BinarySearchTree {
 
 	Node root;
@@ -10,34 +8,34 @@ public class BinarySearchTree {
 		root = insert(root, value);
 	}
 
-	protected Node insert(Node node, int value) {
+	protected Node insert(Node node, int key) {
 		if (node == null) {
-			return new Node(value);
+			return new Node(key);
 		}
 
-		if (value == node.key) {
-			throw new IllegalArgumentException(format("Node with value %d already exists", value));
+		if (key == node.key) {
+			return node;
 		}
 
-		if (value < node.key) {
-			node.left = insert(node.left, value);
+		if (key < node.key) {
+			node.left = insert(node.left, key);
 		} else {
-			node.right = insert(node.right, value);
+			node.right = insert(node.right, key);
 		}
 
 		return node;
 	}
 
-	public void remove(int value) {
-		root = remove(root, value);
+	public void remove(int key) {
+		root = remove(root, key);
 	}
 
-	protected Node remove(Node node, int value) {
+	protected Node remove(Node node, int key) {
 		if (node == null) {
 			return null;
 		}
 
-		if (value == node.key) {
+		if (key == node.key) {
 			if (node.left == null && node.right == null) {
 				return null;
 			}
@@ -57,10 +55,10 @@ public class BinarySearchTree {
 			return node;
 		}
 
-		if (value < node.key) {
-			node.left = remove(node.left, value);
+		if (key < node.key) {
+			node.left = remove(node.left, key);
 		} else {
-			node.right = remove(node.right, value);
+			node.right = remove(node.right, key);
 		}
 
 		return node;

@@ -45,12 +45,6 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    @DisplayName("Insert existing")
-    void insert_existing() {
-        assertThrows(IllegalArgumentException.class, () -> tree.insert(8));
-    }
-
-    @Test
     @DisplayName("Remove when no children")
     void remove_when_no_children() {
         final int key = 6;
