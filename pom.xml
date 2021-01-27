@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
+        <module>util</module>
         <module>task-01-lucky-tickets</module>
         <module>task-02-algebraic-algorithms</module>
         <module>task-03-bit-arithmetic</module>
