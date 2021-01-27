@@ -1,4 +1,4 @@
-package ru.otus;
+package ru.otus.bst;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static ru.otus.TestHelper.walkTree;
+import static ru.otus.bst.TestHelper.walkTree;
 
 class AVLTreeTest {
 

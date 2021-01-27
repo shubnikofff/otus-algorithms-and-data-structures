@@ -1,12 +1,12 @@
-package ru.otus;
+package ru.otus.bst;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static ru.otus.TestHelper.checkIfKeyExists;
-import static ru.otus.TestHelper.walkTree;
+import static ru.otus.bst.TestHelper.checkIfKeyExists;
+import static ru.otus.bst.TestHelper.walkTree;
 
 @DisplayName("Binary Search Tree")
 class BinarySearchTreeTest {
