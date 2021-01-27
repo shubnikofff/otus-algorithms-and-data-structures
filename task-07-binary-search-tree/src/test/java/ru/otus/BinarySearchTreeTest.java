@@ -54,8 +54,9 @@ class BinarySearchTreeTest {
     @DisplayName("Remove when no children")
     void remove_when_no_children() {
         final int key = 6;
-        tree.remove(key);
 
+        assertTrue(checkIfKeyExists(tree.root, key));
+        tree.remove(key);
         assertFalse(checkIfKeyExists(tree.root, key));
         walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
     }
@@ -64,8 +65,9 @@ class BinarySearchTreeTest {
     @DisplayName("Remove when one child")
     void remove_when_one_child() {
         final int key = 8;
-        tree.remove(key);
 
+        assertTrue(checkIfKeyExists(tree.root, key));
+        tree.remove(key);
         assertFalse(checkIfKeyExists(tree.root, key));
         walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
     }
@@ -74,8 +76,9 @@ class BinarySearchTreeTest {
     @DisplayName("Remove when two children")
     void remove_when_two_children() {
         final int key = 5;
-        tree.remove(key);
 
+        assertTrue(checkIfKeyExists(tree.root, key));
+        tree.remove(key);
         assertFalse(checkIfKeyExists(tree.root, key));
         walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
     }
@@ -83,7 +86,10 @@ class BinarySearchTreeTest {
     @Test
     @DisplayName("Search")
     void search() {
-        assertTrue(tree.search(4));
-        assertFalse(tree.search(100));
+        final int key = 100;
+
+        assertFalse(tree.search(key));
+        tree.insert(key);
+        assertTrue(tree.search(key));
     }
 }
