@@ -26,8 +26,8 @@ class AVLTreeTest {
         tree.insert(8);
         tree.insert(7);
 
-        walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
-        walkTree(tree.root, TestHelper::checkBalance);
+        walkTree(tree.getRoot(), TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+        walkTree(tree.getRoot(), TestHelper::checkBalance);
     }
 
     @Test
@@ -39,8 +39,8 @@ class AVLTreeTest {
         tree.insert(12);
         tree.insert(13);
 
-        walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
-        walkTree(tree.root, TestHelper::checkBalance);
+        walkTree(tree.getRoot(), TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+        walkTree(tree.getRoot(), TestHelper::checkBalance);
     }
 
     @Test
@@ -53,8 +53,8 @@ class AVLTreeTest {
         tree.insert(6);
         tree.insert(9);
 
-        walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
-        walkTree(tree.root, TestHelper::checkBalance);
+        walkTree(tree.getRoot(), TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+        walkTree(tree.getRoot(), TestHelper::checkBalance);
     }
 
     @Test
@@ -67,8 +67,8 @@ class AVLTreeTest {
         tree.insert(14);
         tree.insert(11);
 
-        walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
-        walkTree(tree.root, TestHelper::checkBalance);
+        walkTree(tree.getRoot(), TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+        walkTree(tree.getRoot(), TestHelper::checkBalance);
     }
 
     @Test

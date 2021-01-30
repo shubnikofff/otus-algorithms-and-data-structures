@@ -30,8 +30,8 @@ class BinarySearchTreeTest {
         final int key = 2;
         tree.insert(key);
 
-        assertTrue(checkIfKeyExists(tree.root, key));
-        walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+        assertTrue(checkIfKeyExists(tree.getRoot(), key));
+        walkTree(tree.getRoot(), TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
     }
 
     @Test
@@ -40,8 +40,8 @@ class BinarySearchTreeTest {
         final int key = 9;
         tree.insert(key);
 
-        assertTrue(checkIfKeyExists(tree.root, key));
-        walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+        assertTrue(checkIfKeyExists(tree.getRoot(), key));
+        walkTree(tree.getRoot(), TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
     }
 
     @Test
@@ -49,10 +49,10 @@ class BinarySearchTreeTest {
     void remove_when_no_children() {
         final int key = 6;
 
-        assertTrue(checkIfKeyExists(tree.root, key));
+        assertTrue(checkIfKeyExists(tree.getRoot(), key));
         tree.remove(key);
-        assertFalse(checkIfKeyExists(tree.root, key));
-        walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+        assertFalse(checkIfKeyExists(tree.getRoot(), key));
+        walkTree(tree.getRoot(), TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
     }
 
     @Test
@@ -60,10 +60,10 @@ class BinarySearchTreeTest {
     void remove_when_one_child() {
         final int key = 8;
 
-        assertTrue(checkIfKeyExists(tree.root, key));
+        assertTrue(checkIfKeyExists(tree.getRoot(), key));
         tree.remove(key);
-        assertFalse(checkIfKeyExists(tree.root, key));
-        walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+        assertFalse(checkIfKeyExists(tree.getRoot(), key));
+        walkTree(tree.getRoot(), TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
     }
 
     @Test
@@ -71,10 +71,10 @@ class BinarySearchTreeTest {
     void remove_when_two_children() {
         final int key = 5;
 
-        assertTrue(checkIfKeyExists(tree.root, key));
+        assertTrue(checkIfKeyExists(tree.getRoot(), key));
         tree.remove(key);
-        assertFalse(checkIfKeyExists(tree.root, key));
-        walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+        assertFalse(checkIfKeyExists(tree.getRoot(), key));
+        walkTree(tree.getRoot(), TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
     }
 
     @Test

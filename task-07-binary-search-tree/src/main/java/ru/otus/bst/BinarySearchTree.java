@@ -2,7 +2,11 @@ package ru.otus.bst;
 
 public class BinarySearchTree {
 
-	Node root;
+	private Node root;
+
+	public Node getRoot() {
+		return root;
+	}
 
 	public void insert(int value) {
 		root = insert(root, value);

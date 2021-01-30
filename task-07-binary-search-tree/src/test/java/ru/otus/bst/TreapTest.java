@@ -28,9 +28,9 @@ class TreapTest {
 		final int key = 11;
 		tree.insert(key);
 
-		assertTrue(checkIfKeyExists(tree.root, key));
-		walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
-		walkTree(tree.root, TestHelper::checkIfPriorityGraterThanChildrenPriority);
+		assertTrue(checkIfKeyExists(tree.getRoot(), key));
+		walkTree(tree.getRoot(), TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+		walkTree(tree.getRoot(), TestHelper::checkIfPriorityGraterThanChildrenPriority);
 	}
 
 	@Test
@@ -38,10 +38,10 @@ class TreapTest {
 	void remove() {
 		final int key = 10;
 
-		assertTrue(checkIfKeyExists(tree.root, key));
+		assertTrue(checkIfKeyExists(tree.getRoot(), key));
 		tree.remove(key);
-		assertFalse(checkIfKeyExists(tree.root, key));
-		walkTree(tree.root, TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
+		assertFalse(checkIfKeyExists(tree.getRoot(), key));
+		walkTree(tree.getRoot(), TestHelper::checkIfLeftChildKeyLessThanRightChildKey);
 	}
 
 	@Test
