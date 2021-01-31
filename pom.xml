@@ -17,6 +17,7 @@
         <module>task-04-dynamic-arrays</module>
         <module>task-05-sorting-algorithms</module>
         <module>task-06-advanced-sorting-algorithms</module>
+        <module>task-07-binary-search-tree</module>
     </modules>
 
     <properties>
