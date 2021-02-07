@@ -27,36 +27,51 @@ class HashTableTest {
 	}
 
 	@Test
-	@DisplayName("Put with new item")
+	@DisplayName("Method put should add new item")
 	void put_new() {
-		final int key = 12;
-		final String value = "Value";
-
-		assertNull(hashTable.get(key));
-		assertEquals(0, hashTable.size());
-
-		hashTable.put(key, value);
-		assertEquals(value, hashTable.get(key));
-		assertEquals(1, hashTable.size());
+		assertNull(hashTable.get(1));
+		hashTable.put(1, "1");
+		assertEquals("1", hashTable.get(1));
 	}
 
 	@Test
-	@DisplayName("Put with existing item")
+	@DisplayName("Method put should update existing item")
 	void put_existing() {
-		final int key = 12;
-		final String value = "Value";
-		final String newValue = "New value";
+		hashTable.put(1, "1");
+		hashTable.put(1, "2");
 
-		hashTable.put(key, value);
-		assertEquals(value, hashTable.get(key));
-		assertEquals(1, hashTable.size());
-
-		hashTable.put(key, newValue);
-		assertEquals(newValue, hashTable.get(key));
-		assertEquals(1, hashTable.size());
+		assertEquals("2", hashTable.get(1));
 	}
 
 	@Test
+	@DisplayName("Method put should return old value")
+	void put_result() {
+		assertNull(hashTable.put(2, "2"));
+		assertEquals("2", hashTable.put(2, "3"));
+	}
+
+	@Test
+	@DisplayName("Method get should return correct value")
 	void get() {
+		hashTable.put(-100, "100");
+
+		assertEquals("100", hashTable.get(-100));
+	}
+
+	@Test
+	@DisplayName("Method get should return null")
+	void get_not_existing() {
+		assertNull(hashTable.get(-100));
+	}
+
+	@Test
+	@DisplayName("Method remove should delete item and return its  value")
+	void remove() {
+		hashTable.put(1, "1");
+		hashTable.put(2, "2");
+		hashTable.put(3, "3");
+
+		assertEquals("2", hashTable.remove(2));
+		assertNull(hashTable.get(2));
 	}
 }

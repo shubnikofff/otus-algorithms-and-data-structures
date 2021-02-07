@@ -2,110 +2,153 @@ package ru.otus;
 
 public class HashTable<K, V> {
 
-    private static final int DEFAULT_INITIAL_CAPACITY = 1 << 4;
+	private static final int DEFAULT_INITIAL_CAPACITY = 1 << 4;
 
-    private static final float LOAD_FACTOR = 0.5f;
+	private static final float LOAD_FACTOR = 0.5f;
 
-    private static final int MAXIMUM_CAPACITY = 1 << 30;
+	private static final int MAXIMUM_CAPACITY = 1 << 30;
 
-    private int size;
+	private int size;
 
-    private Entry<K, V>[] entries;
+	private Entry<K, V>[] entries;
 
-    public HashTable(int initialCapacity) {
-        if (initialCapacity < 0) {
-            throw new IllegalArgumentException("Illegal initial capacity: " + initialCapacity);
-        }
+	public HashTable(int initialCapacity) {
+		if (initialCapacity < 0) {
+			throw new IllegalArgumentException("Illegal initial capacity: " + initialCapacity);
+		}
 
-        entries = new Entry[initialCapacity];
-        size = 0;
-    }
+		entries = new Entry[initialCapacity];
+		size = 0;
+	}
 
-    public HashTable() {
-        this(DEFAULT_INITIAL_CAPACITY);
-    }
+	public HashTable() {
+		this(DEFAULT_INITIAL_CAPACITY);
+	}
 
-    public int size() {
-        return size;
-    }
+	public int size() {
+		return size;
+	}
 
-    public V put(K key, V value) {
-        final int entriesLength = entries.length;
-        final int startIndex = getIndex(key);
+	public V put(K key, V value) {
+		final int entriesLength = entries.length;
+		final int startIndex = findIndex(key);
+		int deletedEntryIndex = -1;
 
-        for (int index = startIndex; index != startIndex - 1; index++) {
-            if (entries[index] == null) {
-                entries[index] = new Entry<>(key, value);
-                if (++size > entries.length * LOAD_FACTOR) {
-                    resize();
-                }
-                return null;
-            }
+		for (int index = startIndex; index != startIndex - 1; index++) {
+			if (entries[index] == null) {
+				if (deletedEntryIndex == -1) {
+					entries[index] = new Entry<>(key, value);
+					if (++size > entries.length * LOAD_FACTOR) {
+						resize();
+					}
+				} else {
+					entries[deletedEntryIndex] = new Entry<>(key, value);
+				}
 
-            if (entries[index].key == key) {
-                final V previousValue = entries[index].value;
-                entries[index] = new Entry<>(key, value);
-                return previousValue;
-            }
+				return null;
+			}
 
-            index = index == entriesLength - 1 ? 0 : index + 1;
-        }
+			if (entries[index].key == key) {
+				final V previousValue = entries[index].value;
+				entries[index] = new Entry<>(key, value);
+				return previousValue;
+			}
 
-        return null;
-    }
+			if (entries[index].isDeleted && deletedEntryIndex == -1) {
+				deletedEntryIndex = index;
+			}
 
-    public V get(Object key) {
-        final int entriesLength = entries.length;
-        final int startIndex = getIndex(key);
+			index = index == entriesLength - 1 ? 0 : index + 1;
+		}
 
-        for (int index = startIndex; index != startIndex - 1; index++) {
-            if (entries[index] == null) {
-                return null;
-            }
+		return null;
+	}
 
-            if (entries[index].key == key) {
-                return entries[index].value;
-            }
+	public V get(Object key) {
+		final int entriesLength = entries.length;
+		final int startIndex = findIndex(key);
+		int deletedEntryIndex = -1;
 
-            index = index == entriesLength - 1 ? 0 : index + 1;
-        }
+		for (int index = startIndex; index != startIndex - 1; index++) {
+			if (entries[index] == null) {
+				return null;
+			}
 
-        return null;
-    }
+			if (entries[index].key == key && !entries[index].isDeleted) {
+				final Entry<K, V> foundEntry = entries[index];
 
-    public V remove(Object key) {
-        return null;
-    }
+				if (deletedEntryIndex != -1) {
+					entries[index] = entries[deletedEntryIndex];
+					entries[deletedEntryIndex] = foundEntry;
+				}
 
-    private int getIndex(Object key) {
-        return key.hashCode() % entries.length;
-    }
+				return foundEntry.value;
+			}
 
-    private void resize() {
-        final int newCapacity = Math.min(entries.length * 2, MAXIMUM_CAPACITY);
-        final Entry<K, V>[] newEntries = new Entry[newCapacity];
+			if (entries[index].isDeleted && deletedEntryIndex == -1) {
+				deletedEntryIndex = index;
+			}
 
-        for (Entry<K, V> entry : entries) {
-            if (entry != null) {
-                newEntries[entry.key.hashCode() % newCapacity] = entry;
-            }
-        }
+			index = index == entriesLength - 1 ? 0 : index + 1;
+		}
 
-        entries = newEntries;
-    }
+		return null;
+	}
 
-    private static class Entry<K, V> {
+	public V remove(Object key) {
+		final int entriesLength = entries.length;
+		final int startIndex = findIndex(key);
 
-        private final K key;
+		for (int index = startIndex; index != startIndex - 1; index++) {
+			if (entries[index] == null) {
+				return null;
+			}
 
-        private final V value;
+			if (entries[index].key == key) {
+				entries[index].isDeleted = true;
+				return entries[index].value;
+			}
 
-        private boolean isDeleted;
+			index = index == entriesLength - 1 ? 0 : index + 1;
+		}
 
-        public Entry(K key, V value) {
-            this.key = key;
-            this.value = value;
-            isDeleted = false;
-        }
-    }
+		return null;
+	}
+
+	private static int findIndex(Object key, Object[] entries) {
+		return Math.abs(key.hashCode()) % entries.length;
+	}
+
+	private int findIndex(Object key) {
+		return findIndex(key, entries);
+	}
+
+	private void resize() {
+		final int newCapacity = Math.min(entries.length * 2, MAXIMUM_CAPACITY);
+		final Entry<K, V>[] newEntries = new Entry[newCapacity];
+
+		for (Entry<K, V> entry : entries) {
+			if (entry != null) {
+				final int index = findIndex(entry.key, newEntries);
+				newEntries[index] = entry;
+			}
+		}
+
+		entries = newEntries;
+	}
+
+	private static class Entry<K, V> {
+
+		private final K key;
+
+		private final V value;
+
+		private boolean isDeleted;
+
+		public Entry(K key, V value) {
+			this.key = key;
+			this.value = value;
+			isDeleted = false;
+		}
+	}
 }
