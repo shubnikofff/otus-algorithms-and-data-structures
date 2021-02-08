@@ -30,11 +30,11 @@ public class HashTable<K, V> {
 	}
 
 	public V put(K key, V value) {
-		final int entriesLength = entries.length;
-		final int startIndex = findIndex(key);
 		int deletedEntryIndex = -1;
 
-		for (int index = startIndex; index != startIndex - 1; index++) {
+		for (int i = 0; i < MAXIMUM_CAPACITY; i++) {
+			final int index = hash(key, i);
+
 			if (entries[index] == null) {
 				if (deletedEntryIndex == -1) {
 					entries[index] = new Entry<>(key, value);
@@ -57,19 +57,16 @@ public class HashTable<K, V> {
 			if (entries[index].isDeleted && deletedEntryIndex == -1) {
 				deletedEntryIndex = index;
 			}
-
-			index = index == entriesLength - 1 ? 0 : index + 1;
 		}
 
 		return null;
 	}
 
 	public V get(Object key) {
-		final int entriesLength = entries.length;
-		final int startIndex = findIndex(key);
 		int deletedEntryIndex = -1;
 
-		for (int index = startIndex; index != startIndex - 1; index++) {
+		for (int i = 0; i < MAXIMUM_CAPACITY; i++) {
+			final int index = hash(key, i);
 			if (entries[index] == null) {
 				return null;
 			}
@@ -88,18 +85,14 @@ public class HashTable<K, V> {
 			if (entries[index].isDeleted && deletedEntryIndex == -1) {
 				deletedEntryIndex = index;
 			}
-
-			index = index == entriesLength - 1 ? 0 : index + 1;
 		}
 
 		return null;
 	}
 
 	public V remove(Object key) {
-		final int entriesLength = entries.length;
-		final int startIndex = findIndex(key);
-
-		for (int index = startIndex; index != startIndex - 1; index++) {
+		for (int i = 0; i < MAXIMUM_CAPACITY; i++) {
+			final int index = hash(key, i);
 			if (entries[index] == null) {
 				return null;
 			}
@@ -108,19 +101,17 @@ public class HashTable<K, V> {
 				entries[index].isDeleted = true;
 				return entries[index].value;
 			}
-
-			index = index == entriesLength - 1 ? 0 : index + 1;
 		}
 
 		return null;
 	}
 
-	private static int findIndex(Object key, Object[] entries) {
-		return Math.abs(key.hashCode()) % entries.length;
+	private static int hash(Object key, int iteration, Object[] entries) {
+		return (Math.abs(key.hashCode()) + (int) Math.pow(iteration, 2)) % entries.length;
 	}
 
-	private int findIndex(Object key) {
-		return findIndex(key, entries);
+	private int hash(Object key, int iteration) {
+		return hash(key, iteration, entries);
 	}
 
 	private void resize() {
@@ -129,7 +120,10 @@ public class HashTable<K, V> {
 
 		for (Entry<K, V> entry : entries) {
 			if (entry != null) {
-				final int index = findIndex(entry.key, newEntries);
+				int i = 0, index = hash(entry.key, i, newEntries);
+				while (newEntries[index] != null) {
+					index = hash(entry.key, ++i, newEntries);
+				}
 				newEntries[index] = entry;
 			}
 		}

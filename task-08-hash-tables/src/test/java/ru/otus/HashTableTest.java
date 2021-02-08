@@ -12,7 +12,7 @@ class HashTableTest {
 
 	@BeforeEach
 	void setUp() {
-		hashTable = new HashTable<>(3);
+		hashTable = new HashTable<>();
 	}
 
 	@Test
@@ -24,6 +24,21 @@ class HashTableTest {
 		hashTable.put(3, "6");
 
 		assertEquals(3, hashTable.size());
+	}
+
+	@Test
+	@DisplayName("HashTable should be consistent after resizing")
+	void resize() {
+		hashTable = new HashTable<>(5);
+		hashTable.put(10, "10");
+		hashTable.put(20, "20");
+		hashTable.put(30, "30");
+		hashTable.put(40, "40");
+
+		assertEquals("10", hashTable.get(10));
+		assertEquals("20", hashTable.get(20));
+		assertEquals("30", hashTable.get(30));
+		assertEquals("40", hashTable.get(40));
 	}
 
 	@Test
