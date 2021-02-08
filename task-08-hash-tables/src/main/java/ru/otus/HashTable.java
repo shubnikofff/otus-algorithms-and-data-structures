@@ -8,6 +8,8 @@ public class HashTable<K, V> {
 
 	private static final int MAXIMUM_CAPACITY = 1 << 30;
 
+	private static final int NOT_EXISTING_INDEX = -1;
+
 	private int size;
 
 	private Entry<K, V>[] entries;
@@ -30,13 +32,13 @@ public class HashTable<K, V> {
 	}
 
 	public V put(K key, V value) {
-		int deletedEntryIndex = -1;
+		int deletedEntryIndex = NOT_EXISTING_INDEX;
 
 		for (int i = 0; i < MAXIMUM_CAPACITY; i++) {
 			final int index = hash(key, i);
 
 			if (entries[index] == null) {
-				if (deletedEntryIndex == -1) {
+				if (deletedEntryIndex == NOT_EXISTING_INDEX) {
 					entries[index] = new Entry<>(key, value);
 					if (++size > entries.length * LOAD_FACTOR) {
 						resize();
@@ -54,7 +56,7 @@ public class HashTable<K, V> {
 				return previousValue;
 			}
 
-			if (entries[index].isDeleted && deletedEntryIndex == -1) {
+			if (entries[index].isDeleted && deletedEntryIndex == NOT_EXISTING_INDEX) {
 				deletedEntryIndex = index;
 			}
 		}
@@ -63,7 +65,7 @@ public class HashTable<K, V> {
 	}
 
 	public V get(Object key) {
-		int deletedEntryIndex = -1;
+		int deletedEntryIndex = NOT_EXISTING_INDEX;
 
 		for (int i = 0; i < MAXIMUM_CAPACITY; i++) {
 			final int index = hash(key, i);
@@ -74,7 +76,7 @@ public class HashTable<K, V> {
 			if (entries[index].key == key && !entries[index].isDeleted) {
 				final Entry<K, V> foundEntry = entries[index];
 
-				if (deletedEntryIndex != -1) {
+				if (deletedEntryIndex != NOT_EXISTING_INDEX) {
 					entries[index] = entries[deletedEntryIndex];
 					entries[deletedEntryIndex] = foundEntry;
 				}
@@ -82,7 +84,7 @@ public class HashTable<K, V> {
 				return foundEntry.value;
 			}
 
-			if (entries[index].isDeleted && deletedEntryIndex == -1) {
+			if (entries[index].isDeleted && deletedEntryIndex == NOT_EXISTING_INDEX) {
 				deletedEntryIndex = index;
 			}
 		}
