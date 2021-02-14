@@ -109,7 +109,7 @@ public class HashTable<K, V> {
 	}
 
 	private static int hash(Object key, int iteration, Object[] entries) {
-		return (Math.abs(key.hashCode()) + (int) Math.pow(iteration, 2)) % entries.length;
+		return (Math.abs(key.hashCode()) + iteration * iteration) % entries.length;
 	}
 
 	private int hash(Object key, int iteration) {
