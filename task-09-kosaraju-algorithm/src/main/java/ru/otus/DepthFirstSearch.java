@@ -11,10 +11,10 @@ public class DepthFirstSearch {
 
 		while (!stack.empty()) {
 			final int vertex = stack.pop();
+			visit.accept(vertex);
 
 			for (int adjacentVertex : graph[vertex]) {
 				if (!visited[adjacentVertex] && !stack.contains(adjacentVertex)) {
-					visit.accept(adjacentVertex);
 					visited[adjacentVertex] = true;
 					stack.push(adjacentVertex);
 				}
