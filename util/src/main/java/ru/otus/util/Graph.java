@@ -1,9 +1,9 @@
-package ru.otus.graph.util;
+package ru.otus.util;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
 
-public class GraphUtils {
+public class Graph {
 
     public static void depthFirstSearch(int[][] graph, int startVertex, Consumer<Integer> visitor) {
         final boolean[] visited = new boolean[graph.length];
