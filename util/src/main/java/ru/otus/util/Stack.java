@@ -1,13 +1,10 @@
-package ru.otus;
-
-import ru.otus.list.FactorArrayList;
-import ru.otus.list.List;
+package ru.otus.util;
 
 import java.util.EmptyStackException;
 
 public class Stack<T> {
 
-	private final List<T> list = new FactorArrayList<>();
+	private final List<T> list = new List<>();
 
 	public T push(T item) {
 		list.add(item);
@@ -32,6 +29,10 @@ public class Stack<T> {
 		}
 
 		return false;
+	}
+
+	public int size() {
+		return list.size();
 	}
 
 	public boolean empty() {

@@ -1,4 +1,4 @@
-package ru.otus;
+package ru.otus.util;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
