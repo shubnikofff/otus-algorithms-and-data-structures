@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 public class Graph {
 
-    public static void depthFirstSearch(int[][] graph, int startVertex, Consumer<Integer> visitor) {
+    public static void dfsRecursive(int[][] graph, int startVertex, Consumer<Integer> visitor) {
         final boolean[] visited = new boolean[graph.length];
         dfsRecursive(graph, startVertex, visitor, visited);
     }
@@ -20,6 +20,25 @@ public class Graph {
         }
 
         visitor.accept(vertex);
+    }
+
+    public static void dfsIterative(int[][] graph, int startVertex, Consumer<Integer> visitor) {
+        final boolean[] used = new boolean[graph.length];
+        final Stack<Integer> stack = new Stack<>();
+        stack.push(startVertex);
+
+        while (!stack.empty()) {
+            final int vertex = stack.pop();
+            used[vertex] = true;
+
+            for (int adjacentVertex : graph[vertex]) {
+                if (!used[adjacentVertex] && !stack.contains(adjacentVertex)) {
+                    stack.push(adjacentVertex);
+                }
+            }
+
+            visitor.accept(vertex);
+        }
     }
 
     public static int[][] transpose(int[][] graph) {

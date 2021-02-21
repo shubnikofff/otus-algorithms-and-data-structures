@@ -24,10 +24,18 @@ class GraphTest {
     }
 
     @Test
-    void depthFirstSearchRecursive() {
+    void dfsRecursive() {
         final int[] expectedResult = {8, 7, 1, 4, 5, 3, 2, 6, 0};
         final List<Integer> result = new ArrayList<>(graph.length);
-        Graph.depthFirstSearch(graph, 0, result::add);
+        Graph.dfsRecursive(graph, 0, result::add);
+        assertArrayEquals(expectedResult, result.stream().mapToInt(Integer::intValue).toArray());
+    }
+
+    @Test
+    void dfsIterative() {
+        final int[] expectedResult = {0, 6, 3, 5, 4, 2, 1, 8, 7};
+        final List<Integer> result = new ArrayList<>(graph.length);
+        Graph.dfsIterative(graph, 0, result::add);
         assertArrayEquals(expectedResult, result.stream().mapToInt(Integer::intValue).toArray());
     }
 }
