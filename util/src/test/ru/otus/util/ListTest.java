@@ -42,4 +42,9 @@ class ListTest {
 		assertEquals(5, list.size());
 	}
 
+	@Test
+	void toArray() {
+		final Integer[] expectedResult = {100, 200, 300, 400, 500};
+		assertArrayEquals(expectedResult, list.toArray());
+	}
 }

@@ -1,5 +1,7 @@
 package ru.otus.util;
 
+import java.util.Arrays;
+
 public class List<T> {
 
 	private static final int INITIAL_LENGTH = 10;
@@ -45,6 +47,11 @@ public class List<T> {
 
 	public int size() {
 		return size;
+	}
+
+	@SuppressWarnings("unchecked")
+	public T[] toArray() {
+		return Arrays.copyOf((T[]) array, size);
 	}
 
 	private void resize() {
