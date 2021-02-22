@@ -6,16 +6,16 @@ import java.util.function.Consumer;
 public class Graph {
 
     public static void dfsRecursive(int[][] graph, int startVertex, Consumer<Integer> visitor) {
-        final boolean[] visited = new boolean[graph.length];
-        dfsRecursive(graph, startVertex, visitor, visited);
+        final boolean[] used = new boolean[graph.length];
+        dfsRecursive(graph, startVertex, used, visitor);
     }
 
-    private static void dfsRecursive(int[][] graph, int vertex, Consumer<Integer> visitor, boolean[] used) {
+    public static void dfsRecursive(int[][] graph, int vertex, boolean[] used, Consumer<Integer> visitor) {
         used[vertex] = true;
 
         for (int adjacentVertex : graph[vertex]) {
             if (!used[adjacentVertex]) {
-                dfsRecursive(graph, adjacentVertex, visitor, used);
+                dfsRecursive(graph, adjacentVertex, used, visitor);
             }
         }
 
