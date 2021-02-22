@@ -24,6 +24,10 @@ public class Graph {
 
     public static void dfsIterative(int[][] graph, int startVertex, Consumer<Integer> visitor) {
         final boolean[] used = new boolean[graph.length];
+        dfsIterative(graph, startVertex, used, visitor);
+    }
+
+    public static void dfsIterative(int[][] graph, int startVertex, boolean[] used, Consumer<Integer> visitor) {
         final Stack<Integer> stack = new Stack<>();
         stack.push(startVertex);
 

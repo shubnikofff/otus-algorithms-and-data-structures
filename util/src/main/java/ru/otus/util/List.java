@@ -51,7 +51,7 @@ public class List<T> {
 
 	@SuppressWarnings("unchecked")
 	public T[] toArray() {
-		return Arrays.copyOf((T[]) array, size);
+		return (T[]) Arrays.copyOf(array, size);
 	}
 
 	private void resize() {
