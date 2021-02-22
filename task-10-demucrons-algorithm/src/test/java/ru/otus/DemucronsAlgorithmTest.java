@@ -25,6 +25,6 @@ class DemucronsAlgorithmTest {
 
 	@Test
 	void sort() {
-
+		DemucronsAlgorithm.sort(graph);
 	}
 }
