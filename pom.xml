@@ -19,6 +19,7 @@
         <module>task-06-advanced-sorting-algorithms</module>
         <module>task-07-binary-search-tree</module>
         <module>task-08-hash-tables</module>
+        <module>task-10-demucrons-algorithm</module>
     </modules>
 
     <properties>
