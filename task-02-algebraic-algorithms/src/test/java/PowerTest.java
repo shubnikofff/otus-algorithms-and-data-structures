@@ -5,8 +5,8 @@ import ru.otus.power.Arguments;
 import ru.otus.power.BinaryWithMultiplyPower;
 import ru.otus.power.FastPower;
 import ru.otus.power.IterationPower;
-import ru.otus.test.TestData;
-import ru.otus.test.TestDataSource;
+import ru.otus.util.test.TestData;
+import ru.otus.util.test.TestDataSource;
 
 import java.util.stream.Stream;
 

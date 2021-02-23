@@ -1,4 +1,4 @@
-package ru.otus.test;
+package ru.otus.util.test;
 
 import java.io.File;
 import java.io.IOException;

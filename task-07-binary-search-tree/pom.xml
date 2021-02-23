@@ -18,9 +18,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>ru.otus</groupId>
-            <artifactId>util</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.7.0</version>
         </dependency>
     </dependencies>
 

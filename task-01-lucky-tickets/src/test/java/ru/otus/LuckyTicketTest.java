@@ -3,7 +3,7 @@ package ru.otus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
-import ru.otus.test.TestDataSource;
+import ru.otus.util.test.TestDataSource;
 
 import java.util.List;
 import java.util.stream.Stream;
