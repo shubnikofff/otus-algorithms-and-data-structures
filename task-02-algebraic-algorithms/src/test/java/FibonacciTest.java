@@ -5,8 +5,8 @@ import ru.otus.fibonacci.GoldenRatioFibonacci;
 import ru.otus.fibonacci.IterationFibonacci;
 import ru.otus.fibonacci.MatrixMultiplyFibonacci;
 import ru.otus.fibonacci.RecursionFibonacci;
-import ru.otus.test.TestData;
-import ru.otus.test.TestDataSource;
+import ru.otus.util.test.TestData;
+import ru.otus.util.test.TestDataSource;
 
 import java.math.BigInteger;
 import java.util.stream.Stream;
