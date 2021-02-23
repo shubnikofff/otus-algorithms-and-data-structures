@@ -1,6 +1,6 @@
 package ru.otus;
 
-import ru.otus.file.FileGenerator;
+import ru.otus.util.FileGenerator;
 import ru.otus.sort.CountingSort;
 import ru.otus.sort.MergeSort;
 
