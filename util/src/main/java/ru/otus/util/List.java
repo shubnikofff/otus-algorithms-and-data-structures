@@ -52,9 +52,8 @@ public class List<E> implements Iterator<E> {
 		return size;
 	}
 
-	@SuppressWarnings("unchecked")
-	public E[] toArray() {
-		return (E[]) Arrays.copyOf(array, size);
+	public Object[] toArray() {
+		return Arrays.copyOf(array, size);
 	}
 
 	private void resize() {
