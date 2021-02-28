@@ -2,7 +2,7 @@ package ru.otus;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class DemucronsAlgorithmTest {
 
@@ -23,8 +23,17 @@ class DemucronsAlgorithmTest {
 			{0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
 	};
 
+	private final int[][] expectedResult = {
+			{4, 7},
+			{1, 8, 9},
+			{0, 6, 13},
+			{5},
+			{3, 10, 11, 12},
+			{2},
+	};
+
 	@Test
 	void sort() {
-		DemucronsAlgorithm.sort(graph);
+		assertArrayEquals(expectedResult, DemucronsAlgorithm.sort(graph));
 	}
 }
