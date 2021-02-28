@@ -33,7 +33,7 @@ class DemucronsAlgorithmTest {
 	};
 
 	@Test
-	void sort() {
-		assertArrayEquals(expectedResult, DemucronsAlgorithm.sort(graph));
+	void topologicalSort() {
+		assertArrayEquals(expectedResult, DemucronsAlgorithm.topologicalSort(graph));
 	}
 }
