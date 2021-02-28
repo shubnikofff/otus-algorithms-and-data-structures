@@ -8,47 +8,42 @@ import java.util.stream.IntStream;
 public class DemucronsAlgorithm {
 
     public static int[][] topologicalSort(int[][] graph) {
-        final int[] powers = getColumnSums(graph);
-        final boolean[] used = new boolean[powers.length];
-        final List<List<Integer>> result = sort(graph, powers, used, new List<>());
+        final int[] powersVector = getPowersVector(graph);
+        final boolean[] used = new boolean[powersVector.length];
+        final List<List<Integer>> result = sort(graph, powersVector, used, new List<>());
 
         return toArray(result);
     }
 
-    private static List<List<Integer>> sort(int[][] graph, int[] powers, boolean[] used, List<List<Integer>> result) {
-        final List<Integer> currentLevelVertex = new List<>();
-        int[] nextPowers = new int[powers.length];
+    private static List<List<Integer>> sort(int[][] graph, int[] powersVector, boolean[] used, List<List<Integer>> levels) {
+        final List<Integer> vertexList = new List<>();
+        int[] vector = new int[powersVector.length];
 
-        for (int i = 0; i < powers.length; i++) {
-            if (powers[i] == 0 && !used[i]) {
-                nextPowers = applyOperation(Integer::sum, graph[i], nextPowers);
-                currentLevelVertex.add(i);
+        for (int i = 0; i < powersVector.length; i++) {
+            if (powersVector[i] == 0 && !used[i]) {
+                vector = applyOperation(Integer::sum, graph[i], vector);
+                vertexList.add(i);
                 used[i] = true;
             }
         }
 
-        if (currentLevelVertex.size() == 0) {
-            return result;
+        if (vertexList.size() == 0) {
+            return levels;
         }
 
-        result.add(currentLevelVertex);
+        levels.add(vertexList);
 
-        return sort(graph, applyOperation((a, b) -> a - b, powers, nextPowers), used, result);
+        return sort(graph, applyOperation((a, b) -> a - b, powersVector, vector), used, levels);
     }
 
-    private static int[] getColumnSums(int[][] graph) {
-        final int[] result = new int[graph.length];
+    private static int[] getPowersVector(int[][] graph) {
+        int[] vector = new int[graph.length];
 
-        for (int i = 0; i < graph.length; i++) {
-            int sum = 0;
-            for (final int[] row : graph) {
-                sum += row[i];
-            }
-
-            result[i] = sum;
+        for (final int[] row : graph) {
+            vector = applyOperation(Integer::sum, row, vector);
         }
 
-        return result;
+        return vector;
     }
 
     private static int[] applyOperation(BinaryOperator<Integer> operator, int[] a, int[] b) {
