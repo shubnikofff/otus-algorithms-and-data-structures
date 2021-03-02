@@ -7,23 +7,24 @@ import java.util.stream.IntStream;
 
 public class DemucronsAlgorithm {
 
+    private final static short USED_POWER = -1;
+
     public static int[][] topologicalSort(int[][] graph) {
         final int[] powersVector = getPowersVector(graph);
-        final boolean[] used = new boolean[powersVector.length];
-        final List<List<Integer>> result = sort(graph, powersVector, used, new List<>());
+        final List<List<Integer>> result = sort(graph, powersVector, new List<>());
 
         return toArray(result);
     }
 
-    private static List<List<Integer>> sort(int[][] graph, int[] powersVector, boolean[] used, List<List<Integer>> levels) {
+    private static List<List<Integer>> sort(int[][] graph, int[] powersVector, List<List<Integer>> levels) {
         final List<Integer> vertexList = new List<>();
         int[] vector = new int[powersVector.length];
 
         for (int i = 0; i < powersVector.length; i++) {
-            if (powersVector[i] == 0 && !used[i]) {
+            if (powersVector[i] == 0) {
                 vector = applyOperation(Integer::sum, graph[i], vector);
                 vertexList.add(i);
-                used[i] = true;
+                powersVector[i] = USED_POWER;
             }
         }
 
@@ -33,7 +34,7 @@ public class DemucronsAlgorithm {
 
         levels.add(vertexList);
 
-        return sort(graph, applyOperation((a, b) -> a - b, powersVector, vector), used, levels);
+        return sort(graph, applyOperation((a, b) -> a - b, powersVector, vector), levels);
     }
 
     private static int[] getPowersVector(int[][] graph) {
