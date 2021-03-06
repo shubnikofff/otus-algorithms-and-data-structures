@@ -27,7 +27,7 @@ public class DemucronsAlgorithm {
             }
         }
 
-        if (vertexList.size() == 0) {
+        if (vertexList.isEmpty()) {
             return levels;
         }
 

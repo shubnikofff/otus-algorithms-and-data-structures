@@ -52,6 +52,10 @@ public class List<E> implements Iterator<E> {
 		return size;
 	}
 
+	public boolean isEmpty() {
+		return size == 0;
+	}
+
 	public Object[] toArray() {
 		return Arrays.copyOf(array, size);
 	}
