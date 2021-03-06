@@ -37,13 +37,18 @@ public class DemucronsAlgorithm {
     }
 
     private static int[] getPowersVector(int[][] graph) {
-        int[] vector = new int[graph.length];
+        final int[] result = new int[graph.length];
 
-        for (final int[] row : graph) {
-            vector = applyOperation(Integer::sum, row, vector);
+        for (int i = 0; i < graph.length; i++) {
+            int sum = 0;
+            for (final int[] row : graph) {
+                sum += row[i];
+            }
+
+            result[i] = sum;
         }
 
-        return vector;
+        return result;
     }
 
     private static int[] applyOperation(BinaryOperator<Integer> operator, int[] a, int[] b) {
