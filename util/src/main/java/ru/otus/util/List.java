@@ -1,8 +1,9 @@
 package ru.otus.util;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
-public class List<T> {
+public class List<E> implements Iterator<E> {
 
 	private static final int INITIAL_LENGTH = 10;
 
@@ -11,6 +12,8 @@ public class List<T> {
 	private Object[] array = new Object[INITIAL_LENGTH];
 
 	private final int factor;
+
+	private int cursor = 0;
 
 	private int size = 0;
 
@@ -22,7 +25,7 @@ public class List<T> {
 		this(DEFAULT_FACTOR);
 	}
 
-	public void add(T item) {
+	public void add(E item) {
 		if (size == array.length) {
 			resize();
 		}
@@ -31,13 +34,13 @@ public class List<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public T get(int index) {
-		return (T) array[index];
+	public E get(int index) {
+		return (E) array[index];
 	}
 
 	@SuppressWarnings("unchecked")
-	public T remove(int index) {
-		final T item = (T) array[index];
+	public E remove(int index) {
+		final E item = (E) array[index];
 
 		System.arraycopy(array, index + 1, array, index, size - index);
 		size--;
@@ -49,9 +52,12 @@ public class List<T> {
 		return size;
 	}
 
-	@SuppressWarnings("unchecked")
-	public T[] toArray() {
-		return (T[]) Arrays.copyOf(array, size);
+	public boolean isEmpty() {
+		return size == 0;
+	}
+
+	public Object[] toArray() {
+		return Arrays.copyOf(array, size);
 	}
 
 	private void resize() {
@@ -60,4 +66,13 @@ public class List<T> {
 		array = extendedArray;
 	}
 
+	@Override
+	public boolean hasNext() {
+		return cursor < size;
+	}
+
+	@Override
+	public E next() {
+		return get(cursor++);
+	}
 }
