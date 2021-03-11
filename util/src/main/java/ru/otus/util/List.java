@@ -60,6 +60,21 @@ public class List<E> implements Iterator<E> {
 		return Arrays.copyOf(array, size);
 	}
 
+	@SuppressWarnings("unchecked")
+	public <T> T[] toArray(T[] dest) {
+		if (dest.length < size) {
+			return (T[]) Arrays.copyOf(array, size, dest.getClass());
+		}
+
+		System.arraycopy(array, 0, dest, 0, size);
+
+		if (dest.length > size) {
+			dest[size] = null;
+		}
+
+		return dest;
+	}
+
 	private void resize() {
 		final Object[] extendedArray = new Object[array.length + array.length * factor / 100];
 		System.arraycopy(array, 0, extendedArray, 0, array.length);
