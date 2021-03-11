@@ -1,6 +1,6 @@
 package ru.otus;
 
-public class Edge {
+public class Edge implements Comparable<Edge> {
 
 	private final int src;
 
@@ -29,5 +29,10 @@ public class Edge {
 		return edge.weight == this.weight && (
 				edge.src == this.src && edge.dst == this.dst || edge.dst == this.src && edge.src == this.dst
 		);
+	}
+
+	@Override
+	public int compareTo(Edge o) {
+		return weight - o.weight;
 	}
 }
