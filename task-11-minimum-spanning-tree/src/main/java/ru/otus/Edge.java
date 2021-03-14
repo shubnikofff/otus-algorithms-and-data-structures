@@ -32,7 +32,16 @@ public class Edge implements Comparable<Edge> {
 	}
 
 	@Override
-	public int compareTo(Edge o) {
-		return weight - o.weight;
+	public int compareTo(Edge edge) {
+		if (weight != edge.weight) return weight < edge.weight ? -1 : 1;
+		return 0;
+	}
+
+	public int getSrc() {
+		return src;
+	}
+
+	public int getDst() {
+		return dst;
 	}
 }
