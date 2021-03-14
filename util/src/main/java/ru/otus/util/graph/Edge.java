@@ -1,4 +1,4 @@
-package ru.otus;
+package ru.otus.util.graph;
 
 public class Edge implements Comparable<Edge> {
 
