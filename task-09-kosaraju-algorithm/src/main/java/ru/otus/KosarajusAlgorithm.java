@@ -1,6 +1,6 @@
 package ru.otus;
 
-import ru.otus.util.Graph;
+import ru.otus.util.graph.Graph;
 import ru.otus.util.List;
 
 public class KosarajusAlgorithm {

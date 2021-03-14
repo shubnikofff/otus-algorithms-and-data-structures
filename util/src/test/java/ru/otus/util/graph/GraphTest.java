@@ -1,4 +1,4 @@
-package ru.otus.util;
+package ru.otus.util.graph;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
