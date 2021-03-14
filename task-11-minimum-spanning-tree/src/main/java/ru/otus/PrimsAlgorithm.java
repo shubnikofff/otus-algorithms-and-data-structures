@@ -1,5 +1,7 @@
 package ru.otus;
 
+import ru.otus.util.graph.Edge;
+
 import java.util.Arrays;
 
 public class PrimsAlgorithm {

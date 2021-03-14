@@ -1,7 +1,7 @@
-package ru.otus.kruskal;
+package ru.otus;
 
 import org.junit.jupiter.api.Test;
-import ru.otus.Edge;
+import ru.otus.util.graph.Edge;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
