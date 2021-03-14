@@ -1,4 +1,6 @@
-package ru.otus.util;
+package ru.otus.util.graph;
+
+import ru.otus.util.Stack;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
