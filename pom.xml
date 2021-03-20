@@ -21,6 +21,7 @@
         <module>task-08-hash-tables</module>
         <module>task-09-kosaraju-algorithm</module>
         <module>task-10-demucrons-algorithm</module>
+        <module>task-11-minimum-spanning-tree</module>
     </modules>
 
     <properties>
