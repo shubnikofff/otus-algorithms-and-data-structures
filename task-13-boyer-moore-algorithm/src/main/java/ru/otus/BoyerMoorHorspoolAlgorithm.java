@@ -4,16 +4,16 @@ import java.util.Arrays;
 
 public class BoyerMoorHorspoolAlgorithm {
 
-	public static int substring(String text, String pattern) {
-		final int textLength = text.length();
-		final int patternLength = pattern.length();
-		final int last = patternLength - 1;
-		final int[] shiftMap = getShiftMap(pattern);
+	private static final int NUMBER_OF_CHARS = 128;
 
+	public static int indexOf(char[] text, char[] pattern) {
+		final int[] shiftTable = makeShiftTable(pattern);
+		final int last = pattern.length - 1;
 		int t = 0;
-		while (t < textLength - last) {
-			int p = last;
-			while (p >= 0 && text.charAt(t + p) == pattern.charAt(p)) {
+
+		while (t < text.length - last) {
+			int p = pattern.length - 1;
+			while (p >= 0 && text[t + p] == pattern[p]) {
 				p--;
 			}
 
@@ -21,22 +21,21 @@ public class BoyerMoorHorspoolAlgorithm {
 				return t;
 			}
 
-			t += shiftMap[text.charAt(t + last)];
+			t += shiftTable[text[t + pattern.length - 1]];
 		}
 
 		return -1;
 	}
 
-	private static int[] getShiftMap(String pattern) {
-		final int[] shiftMap = new int[128];
-		final int patternLength = pattern.length();
+	private static int[] makeShiftTable(char[] pattern) {
+		final int[] table = new int[NUMBER_OF_CHARS];
 
-		Arrays.fill(shiftMap, patternLength);
+		Arrays.fill(table, pattern.length);
 
-		for (int p = 0; p < patternLength - 1; p++) {
-			shiftMap[pattern.charAt(p)] = patternLength - p - 1;
+		for (int i = 0; i < pattern.length - 1; i++) {
+			table[pattern[i]] = pattern.length - i - 1;
 		}
 
-		return shiftMap;
+		return table;
 	}
 }
