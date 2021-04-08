@@ -4,73 +4,79 @@ import java.util.Arrays;
 
 public class BoyerMoorAlgorithm {
 
-	private static final int NUMBER_OF_CHARS = 128;
+    private static final int NUMBER_OF_CHARS = 128;
 
-	public static int indexOf(char[] text, char[] pattern) {
-		final int[] shiftTable = makeShiftTable(pattern);
-		final int[] offsetTable = makeOffsetTable(pattern);
+    public static int indexOf(char[] text, char[] pattern) {
+        final int[] shiftTable = makeShiftTable(pattern);
+        final int[] offsetTable = makeOffsetTable(pattern);
 
-		for (int t = pattern.length - 1, p; t < text.length;) {
-			for (p = pattern.length - 1; pattern[p] == text[t]; t--, p--) {
-				if (p == 0) {
-					return t;
-				}
-			}
+        int t = pattern.length - 1;
+        while (t < text.length) {
 
-			t += Math.max(offsetTable[pattern.length - 1 - p], shiftTable[text[t]]);
-		}
+            int p = pattern.length - 1;
+            while (pattern[p] == text[t]) {
+                if (p == 0) {
+                    return t;
+                }
 
-		return -1;
-	}
+                t--;
+                p--;
+            }
 
-	private static int[] makeShiftTable(char[] pattern) {
-		final int[] table = new int[NUMBER_OF_CHARS];
+            t += Math.max(offsetTable[pattern.length - 1 - p], shiftTable[text[t]]);
+        }
 
-		Arrays.fill(table, pattern.length);
+        return -1;
+    }
 
-		for (int i = 0; i < pattern.length - 2; i++) {
-			table[pattern[i]] = pattern.length - i - 1;
-		}
+    private static int[] makeShiftTable(char[] pattern) {
+        final int[] table = new int[NUMBER_OF_CHARS];
 
-		return table;
-	}
+        Arrays.fill(table, pattern.length);
 
-	private static int[] makeOffsetTable(char[] pattern) {
-		final int[] table = new int[pattern.length];
-		int lastPrefixPosition = pattern.length;
+        for (int i = 0; i < pattern.length - 2; i++) {
+            table[pattern[i]] = pattern.length - i - 1;
+        }
 
-		for (int i = pattern.length; i > 0; i--) {
-			if (isPrefix(pattern, i)) {
-				lastPrefixPosition = i;
-			}
-			table[pattern.length - i] = lastPrefixPosition - i + pattern.length;
-		}
+        return table;
+    }
 
-		for (int i = 0; i < pattern.length - 1; i++) {
-			final int suffixLength = suffixLength(pattern, i);
-			table[suffixLength] = pattern.length - 1 - i + suffixLength;
-		}
+    private static int[] makeOffsetTable(char[] pattern) {
+        final int[] table = new int[pattern.length];
+        int lastPrefixPosition = pattern.length;
 
-		return table;
-	}
+        for (int i = pattern.length; i > 0; i--) {
+            if (isPrefix(pattern, i)) {
+                lastPrefixPosition = i;
+            }
+            table[pattern.length - i] = lastPrefixPosition - i + pattern.length;
+        }
 
-	private static boolean isPrefix(char[] pattern, int index) {
-		for (int i = index, j = 0; i < pattern.length; i++, j++) {
-			if (pattern[i] != pattern[j]) {
-				return false;
-			}
-		}
+        for (int i = 0; i < pattern.length - 1; i++) {
+            final int suffixLength = suffixLength(pattern, i);
+            table[suffixLength] = pattern.length - 1 - i + suffixLength;
+        }
 
-		return true;
-	}
+        return table;
+    }
 
-	private static int suffixLength(char[] pattern, int index) {
-		int length = 0;
+    private static boolean isPrefix(char[] pattern, int index) {
+        for (int i = index, j = 0; i < pattern.length; i++, j++) {
+            if (pattern[i] != pattern[j]) {
+                return false;
+            }
+        }
 
-		for (int i = index, j = pattern.length - 1; i >= 0 && pattern[i] == pattern[j]; i--, j--) {
-			length++;
-		}
+        return true;
+    }
 
-		return length;
-	}
+    private static int suffixLength(char[] pattern, int index) {
+        int length = 0;
+
+        for (int i = index, j = pattern.length - 1; i >= 0 && pattern[i] == pattern[j]; i--, j--) {
+            length++;
+        }
+
+        return length;
+    }
 }
