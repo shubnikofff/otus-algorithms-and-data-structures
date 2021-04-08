@@ -20,22 +20,24 @@ public class FloydWarshallAlgorithm {
     }
 
     private void init(Integer[][] graph) {
-        for (int i = 0; i < graph.length; i++) {
-            for (int j = 0; j < graph[i].length; j++) {
-                distances[i][j] = (i == j) ? 0 : (graph[i][j] == null) ? Float.POSITIVE_INFINITY : graph[i][j];
-                next[i][j] = j;
+        for (int x = 0; x < graph.length; x++) {
+            for (int y = 0; y < graph[x].length; y++) {
+                distances[x][y] = (x == y)
+                        ? 0
+                        : (graph[x][y] == null) ? Float.POSITIVE_INFINITY : graph[x][y];
+                next[x][y] = y;
             }
         }
     }
 
     private void relax() {
         for (int k = 0; k < distances.length; k++) {
-            for (int i = 0; i < distances.length; i++) {
-                for (int j = 0; j < distances.length; j++) {
-                    final float altDistance = distances[i][k] + distances[k][j];
-                    if (distances[i][j] > altDistance) {
-                        distances[i][j] = altDistance;
-                        next[i][j] = next[i][k];
+            for (int x = 0; x < distances.length; x++) {
+                for (int y = 0; y < distances.length; y++) {
+                    final float altDistance = distances[x][k] + distances[k][y];
+                    if (distances[x][y] > altDistance) {
+                        distances[x][y] = altDistance;
+                        next[x][y] = next[x][k];
                     }
                 }
             }
@@ -54,9 +56,9 @@ public class FloydWarshallAlgorithm {
         final List<Edge> path = new List<>();
 
         while (u != v) {
-            final int next = this.next[u][v];
-            path.add(new Edge(u, next, graph[u][next]));
-            u = next;
+            int nextIndex = next[u][v];
+            path.add(new Edge(u, nextIndex, graph[u][nextIndex]));
+            u = nextIndex;
         }
 
         return path.toArray(new Edge[path.size()]);
