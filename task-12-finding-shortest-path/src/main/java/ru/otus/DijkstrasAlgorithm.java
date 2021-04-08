@@ -41,9 +41,9 @@ public class DijkstrasAlgorithm {
         int vertex = destination;
 
         while (vertex != startVertex) {
-            int prev = this.prev[vertex];
-            path.add(new Edge(prev, vertex, graph[prev][vertex]));
-            vertex = prev;
+            final int previous = prev[vertex];
+            path.add(new Edge(previous, vertex, graph[previous][vertex]));
+            vertex = previous;
         }
 
         final Edge[] result = path.toArray(new Edge[path.size()]);
