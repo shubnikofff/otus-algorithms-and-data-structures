@@ -53,9 +53,9 @@ public class DijkstrasAlgorithm {
     }
 
     private void findShortestPaths() {
-        Integer vertex = findMinNotUsedVertex();
+        int vertex = findMinNotUsedVertex();
 
-        while (vertex != null) {
+        while (vertex != -1) {
             for (int i = 0; i < graph[vertex].length; i++) {
                 final Integer neighborDistance = graph[vertex][i];
                 if (neighborDistance != null) {
@@ -72,11 +72,11 @@ public class DijkstrasAlgorithm {
         }
     }
 
-    private Integer findMinNotUsedVertex() {
-        Integer min = null;
+    private int findMinNotUsedVertex() {
+        int min = -1;
 
         for (int i = 0; i < distances.length; i++) {
-            if (!used[i] && (min == null || distances[i] < distances[min])) {
+            if (!used[i] && (min == -1 || distances[i] < distances[min])) {
                 min = i;
             }
         }
