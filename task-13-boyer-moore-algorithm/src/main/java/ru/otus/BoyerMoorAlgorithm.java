@@ -10,20 +10,20 @@ public class BoyerMoorAlgorithm {
         final int[] shiftTable = makeShiftTable(pattern);
         final int[] offsetTable = makeOffsetTable(pattern);
 
-        int t = pattern.length - 1;
-        while (t < text.length) {
+        int textIdx = pattern.length - 1;
+        while (textIdx < text.length) {
 
-            int p = pattern.length - 1;
-            while (pattern[p] == text[t]) {
-                if (p == 0) {
-                    return t;
+            int pattIdx = pattern.length - 1;
+            while (pattern[pattIdx] == text[textIdx]) {
+                if (pattIdx == 0) {
+                    return textIdx;
                 }
 
-                t--;
-                p--;
+                textIdx--;
+                pattIdx--;
             }
 
-            t += Math.max(offsetTable[pattern.length - 1 - p], shiftTable[text[t]]);
+            textIdx += Math.max(offsetTable[pattern.length - 1 - pattIdx], shiftTable[text[textIdx]]);
         }
 
         return -1;
