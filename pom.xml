@@ -23,6 +23,7 @@
         <module>task-10-demucrons-algorithm</module>
         <module>task-11-minimum-spanning-tree</module>
         <module>task-12-finding-shortest-path</module>
+        <module>task-13-boyer-moore-algorithm</module>
     </modules>
 
     <properties>
