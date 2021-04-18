@@ -11,10 +11,6 @@ public class Trie {
         root = new TrieNode(null, false);
     }
 
-    private void addPattern(String pattern) {
-
-    }
-
     public static TrieBuilder builder() {
         return new TrieBuilder();
     }
@@ -24,7 +20,7 @@ public class Trie {
         private final Trie trie = new Trie();
 
         public TrieBuilder withPattern(String pattern) {
-            trie.root.addChild(pattern, 0);
+            trie.root.addChild(pattern);
             return this;
         }
 
