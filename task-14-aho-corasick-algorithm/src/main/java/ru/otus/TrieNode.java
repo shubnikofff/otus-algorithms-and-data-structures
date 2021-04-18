@@ -10,6 +10,8 @@ public class TrieNode {
 
 	private final boolean isTerminal;
 
+	private TrieNode suffixLink;
+
 	public TrieNode(String key, boolean isTerminal) {
 		this.key = key;
 		this.isTerminal = isTerminal;
@@ -20,12 +22,20 @@ public class TrieNode {
 		addChild(key, 0);
 	}
 
+	public TrieNode getChild(char key) {
+		return children[charToChildIndex(key)];
+	}
+
+	private int charToChildIndex(char key) {
+		return key - 'a';
+	}
+
 	private void addChild(String key, int keyPosition) {
 		if (keyPosition == key.length()) {
 			return;
 		}
 
-		final int childIdx = key.charAt(keyPosition) - 'a';
+		final int childIdx = charToChildIndex(key.charAt(keyPosition));
 
 		if (children[childIdx] == null) {
 			final String nodeName = key.substring(0, keyPosition + 1);
@@ -34,5 +44,30 @@ public class TrieNode {
 		}
 
 		children[childIdx].addChild(key, ++keyPosition);
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public boolean isTerminal() {
+		return isTerminal;
+	}
+
+	public TrieNode[] getChildren() {
+		return children;
+	}
+
+	public TrieNode getSuffixLink() {
+		return suffixLink;
+	}
+
+	public void setSuffixLink(TrieNode suffixLink) {
+		this.suffixLink = suffixLink;
+	}
+
+	@Override
+	public String toString() {
+		return key;
 	}
 }
