@@ -25,8 +25,35 @@ class TrieTest {
 
 	@Test
 	void search() {
-		final List<String> expectedResult = new List<>();
+		final List<String> expected = new List<>();
+		expected.add("a");
+		expected.add("ab");
+		expected.add("bc");
+		expected.add("c");
+		expected.add("bca");
+		expected.add("a");
+		expected.add("ab");
+		expected.add("cabc");
+		expected.add("bc");
+		expected.add("c");
+		expected.add("bca");
+		expected.add("a");
+		expected.add("caa");
+		expected.add("a");
+		expected.add("ab");
+		expected.add("bc");
+		expected.add("c");
+		expected.add("bca");
+		expected.add("a");
+		expected.add("ab");
+		expected.add("cabc");
+		expected.add("bc");
+		expected.add("c");
+		expected.add("bca");
+		expected.add("a");
+		expected.add("caa");
+		expected.add("a");
 
-		assertEquals(expectedResult, trie.search("abcabcaabcabcaa"));
+		assertEquals(expected, trie.search("abcabcaabcabcaa"));
 	}
 }
