@@ -12,6 +12,8 @@ public class TrieNode {
 
 	private TrieNode suffixLink;
 
+	private TrieNode finalLink;
+
 	public TrieNode(String key, boolean isTerminal) {
 		this.key = key;
 		this.isTerminal = isTerminal;
@@ -64,6 +66,14 @@ public class TrieNode {
 
 	public void setSuffixLink(TrieNode suffixLink) {
 		this.suffixLink = suffixLink;
+	}
+
+	public TrieNode getFinalLink() {
+		return finalLink;
+	}
+
+	public void setFinalLink(TrieNode finalLink) {
+		this.finalLink = finalLink;
 	}
 
 	@Override

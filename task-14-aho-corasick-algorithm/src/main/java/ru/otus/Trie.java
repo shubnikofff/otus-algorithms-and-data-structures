@@ -56,6 +56,19 @@ public class Trie {
 		node.setSuffixLink(root);
 	}
 
+	private void setFinalLink(TrieNode node) {
+		TrieNode finalLink = node.getSuffixLink();
+
+		while (finalLink != root) {
+			if (finalLink.isTerminal()) {
+				node.setFinalLink(finalLink);
+				return;
+			}
+
+			finalLink = finalLink.getSuffixLink();
+		}
+	}
+
 	public static TrieBuilder builder() {
 		return new TrieBuilder();
 	}
@@ -71,6 +84,7 @@ public class Trie {
 
 		public Trie build() {
 			trie.walkTrie(trie.root, trie::setSuffixLink);
+			trie.walkTrie(trie.root, trie::setFinalLink);
 			return trie;
 		}
 	}
