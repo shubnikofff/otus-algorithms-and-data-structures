@@ -17,6 +17,28 @@ public class Trie {
 
 	public List<String> search(String text) {
 		final List<String> result = new List<>();
+		TrieNode currentNode = root;
+
+		for (char nextChar : text.toCharArray()) {
+			TrieNode nextNode = currentNode.getChild(nextChar);
+			while (nextNode == null) {
+				currentNode = currentNode.getSuffixLink();
+				nextNode = currentNode.getChild(nextChar);
+			}
+
+			if (nextNode.isTerminal()) {
+				result.add(nextNode.getKey());
+			}
+
+			TrieNode finalLink = nextNode.getFinalLink();
+			while (finalLink != null) {
+				result.add(finalLink.getKey());
+				finalLink = finalLink.getFinalLink();
+			}
+
+			currentNode = nextNode;
+		}
+
 		return result;
 	}
 
