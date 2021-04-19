@@ -2,6 +2,7 @@ package ru.otus.util;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class List<E> implements Iterator<E> {
 
@@ -89,5 +90,30 @@ public class List<E> implements Iterator<E> {
 	@Override
 	public E next() {
 		return get(cursor++);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		final List<?> list = (List<?>) o;
+
+		if (size != list.size) {
+			return false;
+		}
+
+		for (int i = 0; i < size; i++) {
+			if(array[i] != list.array[i]) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(Arrays.hashCode(array), size);
 	}
 }
