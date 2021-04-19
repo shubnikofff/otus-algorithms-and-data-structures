@@ -4,9 +4,6 @@ import ru.otus.util.List;
 
 import java.util.function.Consumer;
 
-/**
- * Consider only lower case letters a..z
- */
 public class Trie {
 
 	private final TrieNode root;
@@ -17,26 +14,33 @@ public class Trie {
 
 	public List<String> search(String text) {
 		final List<String> result = new List<>();
-		TrieNode currentNode = root;
+		TrieNode currentState = root;
 
 		for (char nextChar : text.toCharArray()) {
-			TrieNode nextNode = currentNode.getChild(nextChar);
-			while (nextNode == null) {
-				currentNode = currentNode.getSuffixLink();
-				nextNode = currentNode.getChild(nextChar);
+			TrieNode nextState = currentState.getChild(nextChar);
+
+			while (nextState == null) {
+				TrieNode suffixLink = currentState.getSuffixLink();
+
+				if (suffixLink == null) {
+					nextState = root;
+				} else {
+					currentState = suffixLink;
+					nextState = currentState.getChild(nextChar);
+				}
 			}
 
-			if (nextNode.isTerminal()) {
-				result.add(nextNode.getKey());
+			if (nextState.isTerminal()) {
+				result.add(nextState.getKey());
 			}
 
-			TrieNode finalLink = nextNode.getFinalLink();
+			TrieNode finalLink = nextState.getFinalLink();
 			while (finalLink != null) {
 				result.add(finalLink.getKey());
 				finalLink = finalLink.getFinalLink();
 			}
 
-			currentNode = nextNode;
+			currentState = nextState;
 		}
 
 		return result;
