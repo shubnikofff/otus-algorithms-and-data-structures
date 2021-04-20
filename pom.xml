@@ -24,6 +24,7 @@
         <module>task-11-minimum-spanning-tree</module>
         <module>task-12-finding-shortest-path</module>
         <module>task-13-boyer-moore-algorithm</module>
+        <module>task-15-knuth-morris-pratt-algorithm</module>
     </modules>
 
     <properties>
