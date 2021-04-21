@@ -1,5 +1,8 @@
 package ru.otus;
 
+import static ru.otus.util.Strings.substringLeft;
+import static ru.otus.util.Strings.substringRight;
+
 public class StateMachineAlgorithm {
 
 	private static final int ALPHABET_SIZE = 26;
@@ -23,13 +26,14 @@ public class StateMachineAlgorithm {
 
 		for (int patternIdx = 0; patternIdx < pattern.length(); patternIdx++) {
 			for (char letter = 'A'; letter <= 'Z'; letter++) {
-				final String line = pattern.substring(0, patternIdx) + letter;
-				int patternPosition = patternIdx + 1;
-				while (!pattern.substring(0, patternPosition).equals(line.substring(patternPosition))) {
-					patternPosition--;
+				final String line = substringLeft(pattern, patternIdx) + letter;
+				int state = patternIdx + 1;
+
+				while (!substringLeft(pattern, state).equals(substringRight(line, state))) {
+					state--;
 				}
 
-				stateMachine[patternIdx][letter - 'A'] = patternPosition;
+				stateMachine[patternIdx][letter - 'A'] = state;
 			}
 		}
 
