@@ -13,7 +13,7 @@ public class KnuthMorrisPrattAlgorithm {
 		final int[] piTable = piFunction.makePiTable(pattern + "#" + text);
 		final int position = findFirst(piTable, pattern.length());
 
-		return position - 2 * pattern.length() - 1;
+		return position - 2 * pattern.length();
 	}
 
 
