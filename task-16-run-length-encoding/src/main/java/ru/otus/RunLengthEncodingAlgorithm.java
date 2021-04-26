@@ -1,25 +1,16 @@
 package ru.otus;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class RunLengthEncodingAlgorithm {
 
-	public static void encode(File inputFile, File outputFile) throws IOException {
-		try (final RandomAccessFile accessFile = new RandomAccessFile(inputFile, "r")) {
-			while (accessFile.getFilePointer() < accessFile.length()) {
-
-
-
-
-
-				System.out.println(accessFile.readByte());
-			}
-		}
+	public static void encode(Path inputFile, Path outputFile) throws IOException {
+		final byte[] bytes = Files.readAllBytes(inputFile);
 	}
 
-	public static void decode(File inputFile, File outputFile) {
+	public static void decode(Path inputFile, Path outputFile) throws IOException {
 		System.out.println("Unpacking...");
 	}
 
