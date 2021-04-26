@@ -26,6 +26,7 @@
         <module>task-13-boyer-moore-algorithm</module>
         <module>task-14-aho-corasick-algorithm</module>
         <module>task-15-knuth-morris-pratt-algorithm</module>
+        <module>task-16-run-length-encoding</module>
     </modules>
 
     <properties>
