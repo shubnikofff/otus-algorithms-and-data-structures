@@ -2,8 +2,6 @@ package ru.otus;
 
 import ru.otus.util.List;
 
-import java.nio.file.Path;
-
 public class RunLengthEncodingAlgorithm {
 
 	public static byte[] encode(byte[] bytes) {
@@ -39,8 +37,33 @@ public class RunLengthEncodingAlgorithm {
 		return toPrimitive(result);
 	}
 
-	public static void decode(Path inputFile, Path outputFile) {
-		System.out.println("Unpacking...");
+	public static byte[] decode(byte[] bytes) {
+		final List<Byte> result = new List<>();
+
+		for (int i = 0; i < bytes.length; i++) {
+			final byte runLength = bytes[i];
+
+			if(runLength > 0) {
+				final byte value = bytes[i + 1];
+
+				for (int j = 0; j < runLength; j++) {
+					result.add(value);
+				}
+
+				i++;
+			}
+
+			if(runLength < 0) {
+				for (int j = 0; j < Math.abs(runLength); j++) {
+					result.add(bytes[j + i + 1]);
+				}
+
+				i += Math.abs(runLength);
+			}
+		}
+
+
+		return toPrimitive(result);
 	}
 
 	private static byte[] toPrimitive(List<Byte> list) {

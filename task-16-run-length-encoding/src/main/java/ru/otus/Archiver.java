@@ -15,7 +15,8 @@ public class Archiver {
 		}
 
 		if(args[0].equals("-u")) {
-			RunLengthEncodingAlgorithm.decode(Path.of(args[1]), Path.of(args[2]));
+			final byte[] decodedFile = RunLengthEncodingAlgorithm.decode(Files.readAllBytes(Path.of(args[1])));
+			Files.write(Path.of(args[2]), decodedFile);
 		} else {
 			final byte[] encodedFile = RunLengthEncodingAlgorithm.encode(Files.readAllBytes(Path.of(args[0])));
 			Files.write(Path.of(args[1]), encodedFile);
