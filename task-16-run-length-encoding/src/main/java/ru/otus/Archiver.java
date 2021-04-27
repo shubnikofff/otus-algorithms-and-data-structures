@@ -1,6 +1,7 @@
 package ru.otus;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Archiver {
@@ -16,7 +17,8 @@ public class Archiver {
 		if(args[0].equals("-u")) {
 			RunLengthEncodingAlgorithm.decode(Path.of(args[1]), Path.of(args[2]));
 		} else {
-			RunLengthEncodingAlgorithm.encode(Path.of(args[0]), Path.of(args[1]));
+			final byte[] encodedFile = RunLengthEncodingAlgorithm.encode(Files.readAllBytes(Path.of(args[0])));
+			Files.write(Path.of(args[1]), encodedFile);
 		}
 	}
 }

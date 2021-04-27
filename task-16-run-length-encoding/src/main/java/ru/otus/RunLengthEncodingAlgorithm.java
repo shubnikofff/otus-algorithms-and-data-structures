@@ -1,17 +1,56 @@
 package ru.otus;
 
-import java.io.IOException;
-import java.nio.file.Files;
+import ru.otus.util.List;
+
 import java.nio.file.Path;
 
 public class RunLengthEncodingAlgorithm {
 
-	public static void encode(Path inputFile, Path outputFile) throws IOException {
-		final byte[] bytes = Files.readAllBytes(inputFile);
+	public static byte[] encode(byte[] bytes) {
+		final List<Byte> result = new List<>();
+
+		int negativeCounterIdx = 0;
+		for (int i = 0; i < bytes.length; i++) {
+
+			byte counter = 1;
+			while (i + 1 < bytes.length && bytes[i] == bytes[i + 1] && counter < Byte.MAX_VALUE) {
+				counter++;
+				i++;
+			}
+
+			if (counter > 1) {
+				result.add(counter);
+				negativeCounterIdx = result.size() + 1;
+			} else if (negativeCounterIdx == result.size()) {
+				result.add((byte) -1);
+			} else {
+				final byte negativeCounterValue = result.get(negativeCounterIdx);
+				if (negativeCounterValue > Byte.MIN_VALUE) {
+					result.set(negativeCounterIdx, (byte) (result.get(negativeCounterIdx) - 1));
+				} else {
+					result.add((byte) -1);
+					negativeCounterIdx = result.size() + 1;
+				}
+			}
+
+			result.add(bytes[i]);
+		}
+
+		return toPrimitive(result);
 	}
 
-	public static void decode(Path inputFile, Path outputFile) throws IOException {
+	public static void decode(Path inputFile, Path outputFile) {
 		System.out.println("Unpacking...");
 	}
 
+	private static byte[] toPrimitive(List<Byte> list) {
+		final byte[] result = new byte[list.size()];
+		int index = 0;
+
+		for (Byte item : list) {
+			result[index++] = item;
+		}
+
+		return result;
+	}
 }
