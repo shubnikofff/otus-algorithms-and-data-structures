@@ -7,31 +7,31 @@ public class RunLengthEncodingAlgorithm {
 	public static byte[] encode(byte[] bytes) {
 		final List<Byte> result = new List<>();
 
-		int negativeCounterIdx = 0;
-		for (int i = 0; i < bytes.length; i++) {
+		int runLengthIdx = 0;
+		for (int byteIdx = 0; byteIdx < bytes.length; byteIdx++) {
 
-			byte counter = 1;
-			while (i + 1 < bytes.length && bytes[i] == bytes[i + 1] && counter < Byte.MAX_VALUE) {
-				counter++;
-				i++;
+			byte runLength = 1;
+			while (byteIdx + 1 < bytes.length && bytes[byteIdx] == bytes[byteIdx + 1] && runLength < Byte.MAX_VALUE) {
+				runLength++;
+				byteIdx++;
 			}
 
-			if (counter > 1) {
-				result.add(counter);
-				negativeCounterIdx = result.size() + 1;
-			} else if (negativeCounterIdx == result.size()) {
+			if (runLength > 1) {
+				result.add(runLength);
+				runLengthIdx = result.size() + 1;
+			} else if (runLengthIdx == result.size()) {
 				result.add((byte) -1);
 			} else {
-				final byte negativeCounterValue = result.get(negativeCounterIdx);
+				final byte negativeCounterValue = result.get(runLengthIdx);
 				if (negativeCounterValue > Byte.MIN_VALUE) {
-					result.set(negativeCounterIdx, (byte) (result.get(negativeCounterIdx) - 1));
+					result.set(runLengthIdx, (byte) (result.get(runLengthIdx) - 1));
 				} else {
 					result.add((byte) -1);
-					negativeCounterIdx = result.size() + 1;
+					runLengthIdx = result.size() + 1;
 				}
 			}
 
-			result.add(bytes[i]);
+			result.add(bytes[byteIdx]);
 		}
 
 		return toPrimitive(result);
@@ -40,25 +40,22 @@ public class RunLengthEncodingAlgorithm {
 	public static byte[] decode(byte[] bytes) {
 		final List<Byte> result = new List<>();
 
-		for (int i = 0; i < bytes.length; i++) {
-			final byte runLength = bytes[i];
+		for (int byteIdx = 0; byteIdx < bytes.length; byteIdx++) {
+			final byte runLength = bytes[byteIdx];
 
-			if(runLength > 0) {
-				final byte value = bytes[i + 1];
-
-				for (int j = 0; j < runLength; j++) {
-					result.add(value);
+			if (runLength > 0) {
+				for (int i = 0; i < runLength; i++) {
+					result.add(bytes[byteIdx + 1]);
 				}
-
-				i++;
+				byteIdx++;
 			}
 
-			if(runLength < 0) {
-				for (int j = 0; j < Math.abs(runLength); j++) {
-					result.add(bytes[j + i + 1]);
+			if (runLength < 0) {
+				for (int i = 0; i < Math.abs(runLength); i++) {
+					result.add(bytes[i + byteIdx + 1]);
 				}
 
-				i += Math.abs(runLength);
+				byteIdx += Math.abs(runLength);
 			}
 		}
 
