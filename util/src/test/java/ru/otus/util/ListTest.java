@@ -32,6 +32,16 @@ class ListTest {
 	}
 
 	@Test
+	void set() {
+		final Integer result = list.set(1, 300);
+
+		assertEquals(200, result);
+		assertEquals(300,  list.get(1));
+
+		assertThrows(IndexOutOfBoundsException.class, () -> list.set(100, 100));
+	}
+
+	@Test
 	void remove() {
 		assertEquals(300, list.remove(2));
 		assertEquals(4, list.size());
