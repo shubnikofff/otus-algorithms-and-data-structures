@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class List<E> implements Iterator<E> {
+public class List<E> implements Iterator<E>, Iterable<E> {
 
 	private static final int INITIAL_LENGTH = 10;
 
@@ -37,6 +37,17 @@ public class List<E> implements Iterator<E> {
 	@SuppressWarnings("unchecked")
 	public E get(int index) {
 		return (E) array[index];
+	}
+
+	public E set(int index, E item) {
+		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException(index);
+		}
+
+		final E oldValue = get(index);
+		array[index] = item;
+
+		return oldValue;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -93,6 +104,11 @@ public class List<E> implements Iterator<E> {
 	}
 
 	@Override
+	public Iterator<E> iterator() {
+		return this;
+	}
+
+	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
@@ -104,7 +120,7 @@ public class List<E> implements Iterator<E> {
 		}
 
 		for (int i = 0; i < size; i++) {
-			if(array[i] != list.array[i]) {
+			if (array[i] != list.array[i]) {
 				return false;
 			}
 		}
