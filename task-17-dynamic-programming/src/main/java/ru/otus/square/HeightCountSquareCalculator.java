@@ -1,12 +1,12 @@
 package ru.otus.square;
 
-public class HeightSquareCalculator implements SquareCalculator {
+public class HeightCountSquareCalculator implements SquareCalculator {
 
 	private final int[][] map;
 
 	private final int[] row;
 
-	public HeightSquareCalculator(int[][] map) {
+	public HeightCountSquareCalculator(int[][] map) {
 		this.map = map;
 		row = new int[map[0].length];
 	}
