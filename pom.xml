@@ -27,6 +27,7 @@
         <module>task-14-aho-corasick-algorithm</module>
         <module>task-15-knuth-morris-pratt-algorithm</module>
         <module>task-16-run-length-encoding</module>
+        <module>task-17-dynamic-programming</module>
     </modules>
 
     <properties>

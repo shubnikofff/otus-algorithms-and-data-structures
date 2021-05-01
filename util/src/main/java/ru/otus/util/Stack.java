@@ -21,6 +21,16 @@ public class Stack<T> {
 		return list.remove(size - 1);
 	}
 
+	public T peek() {
+		final int size = list.size();
+
+		if (size == 0) {
+			throw new EmptyStackException();
+		}
+
+		return list.get(size - 1);
+	}
+
 	public boolean contains(T item) {
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i) == item) {
